@@ -5,6 +5,13 @@ import com.liuyong.simplems.system.ent.User;
 import java.util.List;
 
 public interface UserService {
-    List<User> listAll();
-    int createUser(User user);
+    List<User> listUsers();
+
+    User getUserById(int id);
+
+    int saveUser(User user);
+
+    int updateUser(User user);
+
+    int removeUser(int id);
 }

@@ -1,21 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.liuyong.simplems.system.dao.UserMapper">
-    <select id="listAll" >
+    <select id="listUsers" resultType="com.liuyong.simplems.system.ent.User">
         select
         *
         from user
     </select>
 
-    <select id="getById" >
+    <select id="getUserById" resultType="com.liuyong.simplems.system.ent.User">
         select
         *
         from user
         where id = #{id}
     </select>
 
-    <insert id="createUser">
+    <insert id="saveUser" parameterType="com.liuyong.simplems.system.ent.User">
         insert into user(id, user_name, description, account_number, password)
         values (#{id}, #{userName}, #{description}, #{accountNumber}, #{password})
     </insert>
+
+    <delete id="removeUser">
+        delete
+        from user
+        where id = #{id}
+    </delete>
+    
+    <update id="updateUser">
+        update user
+        set id = #{id},
+        user_name = #{userName},
+        description = #{description},
+        account_number = #{accountNumber},
+        password = #{password}
+        where id = #{id}
+    </update>
 </mapper>
