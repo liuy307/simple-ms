@@ -1,3 +1,8 @@
+project:
+  name: simple-management-system
+  version: 1.0.0
+  env: development
+
 server:
   port: 8080
 
@@ -9,7 +14,18 @@ spring:
     password: admin
 
 mybatis:
-  mapper-locations: classpath:mapper/*Mapper.xml
+  mapper-locations: com\liuyong\simplems\system\mapper\*.xml
   type-aliases-package: com.liuyong.simplems.dao
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+swagger:
+  host:
+  title: ${project.name}接口文档
+  description: ${project.name}接口文档
+  enabled: true
+  #禁用swagger时的重定向地址
+  redirect-uri: /
 
 
