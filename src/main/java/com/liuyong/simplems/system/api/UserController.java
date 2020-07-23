@@ -24,31 +24,32 @@ public class UserController {
     @ApiOperation("查询全部用户")
     @GetMapping("/listUsers")
     public ApiResponse<List<User>> listUsers() {
-        return ApiResponse.success(userService.listUsers()) ;
+        return ApiResponse.success(userService.list()) ;
     }
 
     @ApiOperation("按id查询用户")
     @GetMapping("/getUserById")
     public ApiResponse<User> getUserById(int id) {
-        return ApiResponse.success(userService.getUserById(id));
+        return ApiResponse.success(userService.getById(id));
     }
 
     @ApiOperation("增加用户")
     @PostMapping("/saveUser")
     public ApiResponse<Integer> saveUser(User user) {
-        return ApiResponse.success(userService.saveUser(user)) ;
+        int i = userService.save(user);
+        return ApiResponse.success(user.getId());
     }
 
     @ApiOperation("修改用户")
     @PostMapping("/updateUser")
     public ApiResponse<Integer> updateUser(User user) {
-        return ApiResponse.success(userService.updateUser(user));
+        return ApiResponse.success(userService.update(user));
     }
 
     @ApiOperation("删除用户")
     @GetMapping("/removeUser")
     public ApiResponse<Integer> removeUser(int id) {
-        return ApiResponse.success(userService.removeUser(id));
+        return ApiResponse.success(userService.remove(id));
     }
 
 }

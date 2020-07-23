@@ -1,10 +1,58 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.liuyong.simplems.system.dao.UserMapper">
-    <select id="listUsers" resultType="com.liuyong.simplems.system.ent.User">
+<!--    Base-->
+    <select id="list" resultType="com.liuyong.simplems.system.ent.User">
         select
         *
         from user
+    </select>
+
+    <select id="getById" resultType="com.liuyong.simplems.system.ent.User">
+        select
+        *
+        from user
+        where id = #{id}
+    </select>
+
+    <insert id="save" parameterType="com.liuyong.simplems.system.ent.User">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into user(user_name, description, account_number, password)
+        values (#{userName}, #{description}, #{accountNumber}, #{password})
+    </insert>
+
+    <delete id="remove">
+        delete
+        from user
+        where id = #{id}
+    </delete>
+    
+    <update id="update">
+        update user
+        set id = #{id},
+        user_name = #{userName},
+        description = #{description},
+        account_number = #{accountNumber},
+        password = #{password}
+        where id = #{id}
+    </update>
+
+
+<!--    自定义-->
+    <resultMap id="UserRoleMap" type="com.liuyong.simplems.system.ent.User">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <result column="description" jdbcType="VARCHAR" property="description" />
+        <result column="account_number" jdbcType="VARCHAR" property="accountNumber" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+    </resultMap>
+    <select id="listUserRoles" resultType="com.liuyong.simplems.system.ent.User">
+        select *
+        from
+        user left join user_role on user.id = user_role.user_id
+        left join role on user_role.role_id = role.id
     </select>
 
     <select id="getUserById" resultType="com.liuyong.simplems.system.ent.User">
@@ -24,7 +72,7 @@
         from user
         where id = #{id}
     </delete>
-    
+
     <update id="updateUser">
         update user
         set id = #{id},
