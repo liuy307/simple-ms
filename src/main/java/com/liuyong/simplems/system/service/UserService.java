@@ -4,7 +4,7 @@ import com.liuyong.simplems.system.ent.User;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService{
     List<User> listUsers();
 
     User getUserById(int id);

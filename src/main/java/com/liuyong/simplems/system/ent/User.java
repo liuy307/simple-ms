@@ -4,9 +4,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+import java.util.List;
+
 @Data
 @ApiModel("用户对象")
-public class User {
+public class User implements Serializable {
     @ApiModelProperty(value = "主键id", example = "1")
     private Integer id;
 
@@ -21,4 +24,7 @@ public class User {
 
     @ApiModelProperty("密码")
     String password;
+
+    @ApiModelProperty("用户角色集合")
+    List<Role> roleList;
 }

@@ -14,7 +14,7 @@ spring:
     password: admin
 
 mybatis:
-  mapper-locations: com\liuyong\simplems\system\mapper\*.xml
+  mapper-locations: mappers/*.xml
   type-aliases-package: com.liuyong.simplems.dao
   configuration:
     map-underscore-to-camel-case: true

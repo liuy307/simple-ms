@@ -15,8 +15,8 @@
     </select>
 
     <insert id="saveUser" parameterType="com.liuyong.simplems.system.ent.User">
-        insert into user(id, user_name, description, account_number, password)
-        values (#{id}, #{userName}, #{description}, #{accountNumber}, #{password})
+        insert into user(user_name, description, account_number, password)
+        values (#{userName}, #{description}, #{accountNumber}, #{password})
     </insert>
 
     <delete id="removeUser">
