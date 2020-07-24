@@ -2,19 +2,15 @@ package com.liuyong.simplems.system.dao;
 
 import com.liuyong.simplems.common.base.BaseMapper;
 import com.liuyong.simplems.system.ent.User;
+import com.liuyong.simplems.system.ent.UserRole;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
-    List<User> listUsers();
+    List<User> listUserRoles();
+    User getUserRoleById(int id);
 
-    User getUserById(int id);
-
-    int saveUser(User user);
-
-    int updateUser(User user);
-
-    int removeUser(int id);
+    int saveUserRoleBatch(List<UserRole> userRoleList);
 }

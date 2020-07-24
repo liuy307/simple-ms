@@ -1,12 +1,19 @@
 package com.liuyong.simplems.system.api;
 
+import com.liuyong.simplems.common.base.BaseController;
+import com.liuyong.simplems.common.base.ExceptionHandlerController;
+import com.liuyong.simplems.system.ent.User;
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 @RestController
 @RequestMapping("test")
 //@Api(value="用户controller",tags={"用户操作接口"})
-public class TestController {
+public class TestController extends ExceptionHandlerController {
     @ApiOperation(value="方法描述-测试", notes ="提示内容")
     @GetMapping("/hello")
     @ApiImplicitParams({@ApiImplicitParam(name="id",value="用户id",required=true)})
@@ -16,5 +23,8 @@ public class TestController {
 
     @ApiOperation(value="方法描述-测试2", notes ="提示内容2")
     @GetMapping("/hi")
-    public String hi(){return "hi";}
+    public String hi() throws FileNotFoundException {
+        InputStream input = new FileInputStream("src/readme.txt");
+        return "hi";
+    }
 }

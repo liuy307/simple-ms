@@ -44,7 +44,16 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
 
-<!--    自定义-->
+    <select id="getIdByNameBatch" resultType="java.lang.Integer">
+        select
+        id
+        from role
+        where role_name in
+        <foreach collection="list" item="name" index="index" open="(" separator="," close=")">
+         #{name}
+        </foreach>
+    </select>
+
   <select id="listRoles" resultType="com.liuyong.simplems.system.ent.Role">
         select
         *

@@ -6,13 +6,8 @@ import com.liuyong.simplems.system.ent.User;
 import java.util.List;
 
 public interface UserService extends BaseService<User> {
-    List<User> listUsers();
+    List<User> listUserRoles();
+    User getUserRoleById(int id);
 
-    User getUserById(int id);
-
-    int saveUser(User user);
-
-    int updateUser(User user);
-
-    int removeUser(int id);
+    int saveUserAndUserRole(User user);
 }

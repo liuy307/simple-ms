@@ -8,13 +8,5 @@ import java.util.List;
 
 @Mapper
 public interface RoleMapper extends BaseMapper<Role> {
-//    List<Role> listRoles();
-//
-//    Role getRoleById(int id);
-//
-//    int saveRole(Role user);
-//
-//    int updateRole(Role user);
-//
-//    int removeRole(int id);
+    List<Integer> getIdByNameBatch(List<String> roleNameList);
 }

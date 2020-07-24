@@ -1,5 +1,6 @@
 package com.liuyong.simplems.system.api;
 
+import com.liuyong.simplems.common.base.BaseController;
 import com.liuyong.simplems.common.core.model.ApiResponse;
 import com.liuyong.simplems.system.ent.User;
 import com.liuyong.simplems.system.service.UserService;
@@ -17,39 +18,34 @@ import java.util.List;
 @RestController
 @RequestMapping("user")
 @Api(tags = "用户管理接口")
-public class UserController {
+public class UserController extends BaseController<User>{
     @Autowired
     UserService userService;
 
-    @ApiOperation("查询全部用户")
-    @GetMapping("/listUsers")
-    public ApiResponse<List<User>> listUsers() {
-        return ApiResponse.success(userService.list()) ;
-    }
-
-    @ApiOperation("按id查询用户")
-    @GetMapping("/getUserById")
-    public ApiResponse<User> getUserById(int id) {
-        return ApiResponse.success(userService.getById(id));
-    }
-
-    @ApiOperation("增加用户")
-    @PostMapping("/saveUser")
-    public ApiResponse<Integer> saveUser(User user) {
+    @Override
+    @ApiOperation("增加")
+    @PostMapping("/save")
+    public ApiResponse<Integer> save(User user) {
         int i = userService.save(user);
         return ApiResponse.success(user.getId());
     }
 
-    @ApiOperation("修改用户")
-    @PostMapping("/updateUser")
-    public ApiResponse<Integer> updateUser(User user) {
-        return ApiResponse.success(userService.update(user));
+    @ApiOperation("列出人员角色关联表")
+    @PostMapping("/listUserRoles")
+    ApiResponse<List<User>> listUserRoles() {
+        return ApiResponse.success(userService.listUserRoles());
     }
 
-    @ApiOperation("删除用户")
-    @GetMapping("/removeUser")
-    public ApiResponse<Integer> removeUser(int id) {
-        return ApiResponse.success(userService.remove(id));
+    @ApiOperation("列出人员角色关联表(根据id)")
+    @PostMapping("/getUserRoleById")
+    ApiResponse<User> getUserRoleById(int id) {
+        return ApiResponse.success(userService.getUserRoleById(id));
     }
 
+    @ApiOperation("新增人员表和人员角色表信息")
+    @PostMapping("/saveUserAndUserRole")
+    ApiResponse<Integer> saveUserAndUserRole(User user) {
+        int flag = userService.saveUserAndUserRole(user);
+        return ApiResponse.success(flag);
+    }
 }

@@ -27,4 +27,7 @@ public class User implements Serializable {
 
     @ApiModelProperty("用户角色集合")
     List<Role> roleList;
+
+    @ApiModelProperty("用户分配角色名字集合")
+    List<String> roleNameList;
 }

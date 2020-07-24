@@ -40,31 +40,40 @@
     </update>
 
 
-<!--    自定义-->
     <resultMap id="UserRoleMap" type="com.liuyong.simplems.system.ent.User">
         <id column="id" jdbcType="INTEGER" property="id" />
         <result column="user_name" jdbcType="VARCHAR" property="userName" />
         <result column="description" jdbcType="VARCHAR" property="description" />
         <result column="account_number" jdbcType="VARCHAR" property="accountNumber" />
         <result column="password" jdbcType="VARCHAR" property="password" />
+        <collection property="roleList" ofType="com.liuyong.simplems.system.ent.Role">
+            <id column="r_id" jdbcType="INTEGER" property="id" />
+            <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+            <result column="r_description" jdbcType="VARCHAR" property="description" />
+        </collection>
     </resultMap>
-    <select id="listUserRoles" resultType="com.liuyong.simplems.system.ent.User">
-        select *
-        from
-        user left join user_role on user.id = user_role.user_id
-        left join role on user_role.role_id = role.id
+
+    <select id="listUserRoles" resultMap="UserRoleMap">
+        select u.*, r.id as r_id, r.role_name, r.description as r_description
+        from user as u
+        left join user_role as ur on u.id = ur.user_id
+        left join role as r on ur.role_id = r.id
     </select>
 
-    <select id="getUserById" resultType="com.liuyong.simplems.system.ent.User">
-        select
-        *
-        from user
-        where id = #{id}
+    <select id="getUserRoleById" resultMap="UserRoleMap">
+        select u.*, r.id as r_id, r.role_name, r.description as r_description
+        from user as u
+        left join user_role as ur on u.id = ur.user_id
+        left join role as r on ur.role_id = r.id
+        where u.id = #{id}
     </select>
 
-    <insert id="saveUser" parameterType="com.liuyong.simplems.system.ent.User">
-        insert into user(user_name, description, account_number, password)
-        values (#{userName}, #{description}, #{accountNumber}, #{password})
+    <insert id="saveUserRoleBatch" parameterType="com.liuyong.simplems.system.ent.UserRole">
+        insert into user_role(user_id, role_id)
+        values
+        <foreach collection="list" item="userRole" index="index" separator=",">
+            (#{userRole.userId}, #{userRole.roleId})
+        </foreach>
     </insert>
 
     <delete id="removeUser">
