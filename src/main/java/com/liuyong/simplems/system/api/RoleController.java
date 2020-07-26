@@ -3,12 +3,10 @@ package com.liuyong.simplems.system.api;
 import com.liuyong.simplems.common.base.BaseController;
 import com.liuyong.simplems.common.core.model.ApiResponse;
 import com.liuyong.simplems.system.ent.Role;
-import com.liuyong.simplems.system.ent.User;
 import com.liuyong.simplems.system.service.RoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,11 +20,35 @@ public class RoleController extends BaseController<Role> {
     @Autowired
     RoleService roleService;
 
-    @Override
-    @ApiOperation("增加")
-    @PostMapping("/save")
-    public ApiResponse<Integer> save(Role role) {
-        int i = roleService.save(role);
-        return ApiResponse.success(role.getId());
+    @ApiOperation("列出角色菜单信息")
+    @PostMapping("/listRoleMenus")
+    ApiResponse<List<Role>> listRoleMenus() {
+        return ApiResponse.success(roleService.listRoleMenus());
+    }
+
+    @ApiOperation("列出角色菜单信息(根据id)")
+    @PostMapping("/getRoleMenuById")
+    ApiResponse<Role> getRoleMenuById(int roleId) {
+        return ApiResponse.success(roleService.getRoleMenuById(roleId));
+    }
+
+    @ApiOperation("新增角色表和角色菜单中间表信息")
+    @PostMapping("/saveRoleAndRoleMenu")
+    ApiResponse<Integer> saveRoleAndRoleMenu(Role user) {
+        int flag = roleService.saveRoleAndRoleMenu(user);
+        return ApiResponse.success(flag);
+    }
+
+    @ApiOperation("删除角色表和角色菜单中间表信息")
+    @PostMapping("/removeRoleAndRoleMenu")
+    ApiResponse<Role> removeRoleAndRoleMenu(int roleId) {
+        return ApiResponse.success(roleService.removeRoleAndRoleMenu(roleId));
+    }
+
+    @ApiOperation("更新角色表和角色菜单中间表信息")
+    @PostMapping("/updateRoleAndRoleMenu")
+    ApiResponse<Integer> updateRoleAndRoleMenu(Role user) {
+        int flag = roleService.updateRoleAndRoleMenu(user);
+        return ApiResponse.success(flag);
     }
 }

@@ -23,7 +23,7 @@
 
 
     <insert id="save" parameterType="com.liuyong.simplems.system.ent.Role" >
-        <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
             SELECT LAST_INSERT_ID()
         </selectKey>
         insert into role (role_name, description)
@@ -33,8 +33,8 @@
     <update id="update" parameterType="com.liuyong.simplems.system.ent.Role">
     update role
     set id = #{id,jdbcType=VARCHAR},
-      role_name = #{record.roleName,jdbcType=VARCHAR},
-      description = #{record.description,jdbcType=VARCHAR}
+      role_name = #{roleName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
@@ -54,39 +54,44 @@
         </foreach>
     </select>
 
-  <select id="listRoles" resultType="com.liuyong.simplems.system.ent.Role">
-        select
-        *
-        from role
+    <resultMap id="RoleMenuMap" type="com.liuyong.simplems.system.ent.Role">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+        <result column="description" jdbcType="VARCHAR" property="description" />
+        <collection property="menuList" ofType="com.liuyong.simplems.system.ent.Menu">
+            <id column="m_id" jdbcType="INTEGER" property="id" />
+            <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+            <result column="m_description" jdbcType="VARCHAR" property="description" />
+            <result column="parent_menu_id" jdbcType="VARCHAR" property="parentMenuId" />
+        </collection>
+    </resultMap>
+
+    <select id="listRoleMenus" resultMap="RoleMenuMap">
+        select r.*, m.id as m_id, m.menu_name, m.description as m_description, m.parent_menu_id
+        from
+        role as r left join role_menu as rm on r.id = rm.role_id
+        left join menu as m on rm.menu_id = m.id
     </select>
 
-  <select id="getRoleById" resultType="com.liuyong.simplems.system.ent.Role">
-        select
-        *
-        from role
-        where id = #{id}
+    <select id="getRoleMenuById" resultMap="RoleMenuMap">
+        select r.*, m.id as m_id, m.menu_name, m.description as m_description, m.parent_menu_id
+        from
+        role as r left join role_menu as rm on r.id = rm.role_id
+        left join menu as m on rm.menu_id = m.id
+        where r.id = #{id}
     </select>
 
+    <insert id="saveRoleMenuBatch" parameterType="com.liuyong.simplems.system.ent.RoleMenu">
+        insert into role_menu(role_id, menu_id)
+        values
+        <foreach collection="list" item="roleMenu" index="index" separator=",">
+            (#{roleMenu.roleId}, #{roleMenu.menuId})
+        </foreach>
+    </insert>
 
-  <insert id="saveRole" parameterType="com.liuyong.simplems.system.ent.Role" >
-    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into role (role_name, description)
-    values (#{roleName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
-  </insert>
-
-  <update id="updateRole" parameterType="com.liuyong.simplems.system.ent.Role">
-    update role
-    set id = #{id,jdbcType=VARCHAR},
-      role_name = #{record.roleName,jdbcType=VARCHAR},
-      description = #{record.description,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-
-  <delete id="removeRole">
-    delete
-    from role
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
+    <delete id="removeRoleMenu">
+        delete
+        from role_menu
+        where role_id = #{roleId}
+    </delete>
 </mapper>

@@ -76,19 +76,9 @@
         </foreach>
     </insert>
 
-    <delete id="removeUser">
+    <delete id="removeUserRole">
         delete
-        from user
-        where id = #{id}
+        from user_role
+        where user_id = #{useId}
     </delete>
-
-    <update id="updateUser">
-        update user
-        set id = #{id},
-        user_name = #{userName},
-        description = #{description},
-        account_number = #{accountNumber},
-        password = #{password}
-        where id = #{id}
-    </update>
 </mapper>

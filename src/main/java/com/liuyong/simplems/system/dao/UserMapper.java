@@ -13,4 +13,6 @@ public interface UserMapper extends BaseMapper<User> {
     User getUserRoleById(int id);
 
     int saveUserRoleBatch(List<UserRole> userRoleList);
+
+    int removeUserRole(int userId);
 }

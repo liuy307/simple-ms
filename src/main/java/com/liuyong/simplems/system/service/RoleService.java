@@ -6,5 +6,12 @@ import com.liuyong.simplems.system.ent.Role;
 import java.util.List;
 
 public interface RoleService extends BaseService<Role> {
-    List<Integer> getIdByNameBatch(List<String> roleNameList);
+    List<Role> listRoleMenus();
+    Role getRoleMenuById(int roleId);
+
+    int saveRoleAndRoleMenu(Role role);
+
+    int removeRoleAndRoleMenu(int roleId);
+
+    int updateRoleAndRoleMenu(Role role);
 }

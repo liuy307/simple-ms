@@ -5,23 +5,19 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Data
 @ApiModel("角色对象")
-public class Role implements Serializable {
+public class Menu implements Serializable {
     @ApiModelProperty(value = "主键id", example = "1")
     private Integer id;
 
-    @ApiModelProperty("角色名")
-    String roleName;
+    @ApiModelProperty("菜单名")
+    private String menuName;
 
     @ApiModelProperty("描述")
     String description;
 
-    @ApiModelProperty("角色分配菜单集合")
-    List<Menu> MenuList;
-
-    @ApiModelProperty("角色分配菜单名字集合")
-    List<String> MenuNameList;
+    @ApiModelProperty("父菜单Id")
+    private String parentMenuId;
 }

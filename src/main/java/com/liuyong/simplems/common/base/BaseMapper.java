@@ -1,7 +1,5 @@
 package com.liuyong.simplems.common.base;
 
-import org.apache.ibatis.annotations.Mapper;
-
 import java.util.List;
 
 public interface BaseMapper<E> {

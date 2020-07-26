@@ -7,7 +7,11 @@ import java.util.List;
 
 public interface UserService extends BaseService<User> {
     List<User> listUserRoles();
-    User getUserRoleById(int id);
+    User getUserRoleById(int userId);
 
     int saveUserAndUserRole(User user);
+
+    int removeUserAndUserRole(int userId);
+
+    int updateUserAndUserRole(User user);
 }

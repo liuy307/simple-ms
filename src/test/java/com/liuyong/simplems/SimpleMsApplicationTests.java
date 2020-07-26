@@ -1,6 +1,7 @@
 package com.liuyong.simplems;
 
 import com.liuyong.simplems.system.api.UserController;
+import com.liuyong.simplems.system.dao.RoleMapper;
 import com.liuyong.simplems.system.service.RoleService;
 import com.liuyong.simplems.system.service.UserService;
 import org.junit.jupiter.api.Test;
@@ -19,8 +20,13 @@ class SimpleMsApplicationTests {
     @Autowired
     UserService userService;
 
+    @Autowired
+    RoleMapper roleMapper;
+
     @Test
     void contextLoads() {
+        roleMapper.listRoleMenus();
+        roleMapper.getRoleMenuById(1);
         List<String> roleNameList = new ArrayList<>(Arrays.asList("超级管理员", "管理员"));
 //        List<Integer> roleIdList = roleService.getIdByNameBatch(roleNameList);
     }

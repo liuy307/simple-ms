@@ -1,10 +1,13 @@
 package com.liuyong.simplems.system.api;
 
-import com.liuyong.simplems.common.base.BaseController;
 import com.liuyong.simplems.common.base.ExceptionHandlerController;
-import com.liuyong.simplems.system.ent.User;
-import io.swagger.annotations.*;
-import org.springframework.web.bind.annotation.*;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
