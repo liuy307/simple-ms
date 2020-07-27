@@ -14,14 +14,14 @@ public class Role implements Serializable {
     private Integer id;
 
     @ApiModelProperty("角色名")
-    String roleName;
+    private String roleName;
 
     @ApiModelProperty("描述")
-    String description;
+    private String description;
 
     @ApiModelProperty("角色分配菜单集合")
-    List<Menu> MenuList;
+    private List<Menu> MenuList;
 
     @ApiModelProperty("角色分配菜单名字集合")
-    List<String> MenuNameList;
+    private List<String> MenuNameList;
 }

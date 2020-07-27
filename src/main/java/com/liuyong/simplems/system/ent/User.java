@@ -16,20 +16,20 @@ public class User implements Serializable {
     private Integer id;
 
     @ApiModelProperty("用户名")
-    String userName;
+    private String userName;
 
     @ApiModelProperty("描述")
-    String description;
+    private String description;
 
     @ApiModelProperty("账号")
-    String accountNumber;
+    private String accountNumber;
 
     @ApiModelProperty("密码")
-    String password;
+    private String password;
 
     @ApiModelProperty("用户角色集合")
-    List<Role> roleList;
+    private List<Role> roleList;
 
     @ApiModelProperty("用户分配角色名字集合")
-    List<String> roleNameList;
+    private List<String> roleNameList;
 }

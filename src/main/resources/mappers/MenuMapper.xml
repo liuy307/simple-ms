@@ -23,7 +23,7 @@
 
 
     <insert id="save" parameterType="com.liuyong.simplems.system.ent.Menu" >
-        <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
             SELECT LAST_INSERT_ID()
         </selectKey>
         insert into menu (menu_name, description)

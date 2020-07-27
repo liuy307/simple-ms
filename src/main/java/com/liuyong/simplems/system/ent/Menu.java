@@ -16,7 +16,7 @@ public class Menu implements Serializable {
     private String menuName;
 
     @ApiModelProperty("描述")
-    String description;
+    private String description;
 
     @ApiModelProperty("父菜单Id")
     private String parentMenuId;
