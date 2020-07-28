@@ -2,8 +2,9 @@ package com.liuyong.simplems.system.dao;
 
 import com.liuyong.simplems.system.ent.Role;
 import com.liuyong.simplems.system.ent.RoleExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface RoleMapper {
     int countByExample(RoleExample example);

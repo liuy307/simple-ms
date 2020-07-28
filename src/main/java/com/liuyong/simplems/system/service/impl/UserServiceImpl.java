@@ -3,11 +3,13 @@ package com.liuyong.simplems.system.service.impl;
 import com.liuyong.simplems.common.base.BaseServiceImpl;
 import com.liuyong.simplems.system.dao.RoleMapper;
 import com.liuyong.simplems.system.dao.UserMapper;
+import com.liuyong.simplems.system.ent.LoginInfo;
 import com.liuyong.simplems.system.ent.User;
 import com.liuyong.simplems.system.ent.UserRole;
 import com.liuyong.simplems.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
     // 创建用户信息，用户角色中间表信息
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int saveUserAndUserRole(User user) {
         int flag1 = userMapper.save(user);
         int userId = user.getId();
@@ -56,6 +59,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
     // 删除用户信息，用户角色中间表信息
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int removeUserAndUserRole(int userId) {
         int flag1 = userMapper.remove(userId);
         int flag2 = userMapper.removeUserRole(userId);
@@ -64,6 +68,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
     // 更新用户信息，用户角色中间表信息
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int updateUserAndUserRole(User user) {
         int flag1 = userMapper.update(user);
         int userId = user.getId();
@@ -82,5 +87,10 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
         }
         int flag3 = userMapper.saveUserRoleBatch(userRoleList);
         return (flag1>0&&flag2>0&&flag3>0 ? flag3:0);
+    }
+
+    @Override
+    public List<User> getUserRoleByLoginInfo(LoginInfo loginInfo) {
+        return userMapper.getUserRoleByLoginInfo(loginInfo);
     }
 }

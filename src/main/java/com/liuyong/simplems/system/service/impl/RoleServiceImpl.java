@@ -8,6 +8,7 @@ import com.liuyong.simplems.system.ent.RoleMenu;
 import com.liuyong.simplems.system.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
 
     // 创建用户信息，用户角色中间表信息
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int saveRoleAndRoleMenu(Role role) {
         int flag1 = roleMapper.save(role);
         int roleId = role.getId();
@@ -55,6 +57,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
 
     // 删除用户信息，用户角色中间表信息
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int removeRoleAndRoleMenu(int roleId) {
         int flag1 = roleMapper.remove(roleId);
         int flag2 = roleMapper.removeRoleMenu(roleId);
@@ -63,6 +66,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
 
     // 更新用户信息，用户角色中间表信息
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int updateRoleAndRoleMenu(Role role) {
         int flag1 = roleMapper.update(role);
         int roleId = role.getId();

@@ -2,8 +2,9 @@ package com.liuyong.simplems.system.dao;
 
 import com.liuyong.simplems.system.ent.User;
 import com.liuyong.simplems.system.ent.UserExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface UserMapper {
     int countByExample(UserExample example);

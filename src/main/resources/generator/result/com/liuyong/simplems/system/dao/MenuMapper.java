@@ -2,8 +2,9 @@ package com.liuyong.simplems.system.dao;
 
 import com.liuyong.simplems.system.ent.Menu;
 import com.liuyong.simplems.system.ent.MenuExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface MenuMapper {
     int countByExample(MenuExample example);

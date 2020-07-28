@@ -1,10 +1,8 @@
 package com.liuyong.simplems.system.api;
 
 import com.liuyong.simplems.common.base.BaseController;
-import com.liuyong.simplems.common.base.BaseService;
 import com.liuyong.simplems.common.core.model.ApiResponse;
 import com.liuyong.simplems.system.ent.Menu;
-import com.liuyong.simplems.system.ent.Role;
 import com.liuyong.simplems.system.service.MenuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,4 +17,12 @@ import java.util.List;
 @RequestMapping("menu")
 @Api(tags = "菜单管理接口")
 public class MenuController extends BaseController<Menu> {
+    @Autowired
+    MenuService menuService;
+
+    @ApiOperation("列出菜单-层级")
+    @PostMapping("/listMenusByLevel")
+    ApiResponse<List<Menu>> listMenusByLevel() {
+        return ApiResponse.success(menuService.listMenusByLevel());
+    }
 }

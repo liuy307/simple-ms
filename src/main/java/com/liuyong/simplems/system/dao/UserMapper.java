@@ -1,6 +1,7 @@
 package com.liuyong.simplems.system.dao;
 
 import com.liuyong.simplems.common.base.BaseMapper;
+import com.liuyong.simplems.system.ent.LoginInfo;
 import com.liuyong.simplems.system.ent.User;
 import com.liuyong.simplems.system.ent.UserRole;
 import org.apache.ibatis.annotations.Mapper;
@@ -15,4 +16,6 @@ public interface UserMapper extends BaseMapper<User> {
     int saveUserRoleBatch(List<UserRole> userRoleList);
 
     int removeUserRole(int userId);
+
+    List<User> getUserRoleByLoginInfo(LoginInfo loginInfo);
 }
