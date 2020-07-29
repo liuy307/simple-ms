@@ -17,5 +17,5 @@ public interface UserMapper extends BaseMapper<User> {
 
     int removeUserRole(int userId);
 
-    List<User> getUserRoleByLoginInfo(LoginInfo loginInfo);
+    List<User> listUserRoleMenusByLoginInfo(LoginInfo loginInfo);
 }

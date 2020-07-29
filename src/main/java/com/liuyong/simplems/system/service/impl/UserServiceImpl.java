@@ -90,7 +90,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     }
 
     @Override
-    public List<User> getUserRoleByLoginInfo(LoginInfo loginInfo) {
-        return userMapper.getUserRoleByLoginInfo(loginInfo);
+    public List<User> listUserRoleMenusByLoginInfo(LoginInfo loginInfo) {
+        return userMapper.listUserRoleMenusByLoginInfo(loginInfo);
     }
 }

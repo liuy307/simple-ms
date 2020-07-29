@@ -23,5 +23,5 @@ public class Menu implements Serializable {
     private int parentMenuId;
 
     @ApiModelProperty("子菜单集合")
-    private List<Menu> menuList;
+    private List<Menu> childMenusList;
 }

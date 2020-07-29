@@ -38,6 +38,6 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
                 childMenus.add(currentMenu);
             }
         }
-        menu.setMenuList(childMenus);
+        menu.setChildMenusList(childMenus);
     }
 }

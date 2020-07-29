@@ -16,5 +16,5 @@ public interface UserService extends BaseService<User> {
 
     int updateUserAndUserRole(User user);
 
-    List<User> getUserRoleByLoginInfo(LoginInfo loginInfo);
+    List<User> listUserRoleMenusByLoginInfo(LoginInfo loginInfo);
 }

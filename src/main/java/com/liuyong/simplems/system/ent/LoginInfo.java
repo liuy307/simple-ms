@@ -14,4 +14,7 @@ public class LoginInfo  implements Serializable {
 
     @ApiModelProperty("密码")
     private String password;
+//
+//    @ApiModelProperty("jwt令牌")
+//    private String token;
 }
