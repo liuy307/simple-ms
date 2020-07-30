@@ -38,7 +38,6 @@ public class LoginController extends ExceptionHandlerController {
         }
 
         String token = JWTUtil.sign(loginInfo.getAccountNumber(), loginInfo.getPassword());
-        loginInfo.setToken(token);
         return  ApiResponse.success(token);
     }
 

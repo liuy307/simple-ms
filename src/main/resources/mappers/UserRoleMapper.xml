@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liuyong.simplems.system.dao.UserRoleMapper">
+<!--    Base-->
+    <select id="list" resultType="com.liuyong.simplems.system.ent.UserRole">
+        select
+        *
+        from user_role
+    </select>
+
+    <select id="getById" resultType="com.liuyong.simplems.system.ent.UserRole">
+        select
+        *
+        from user_role
+        where id = #{id}
+    </select>
+
+    <insert id="save" parameterType="com.liuyong.simplems.system.ent.UserRole">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into user_role(user_id, role_id)
+        values (#{userId}, #{roleId})
+    </insert>
+
+    <delete id="remove">
+        delete
+        from user_role
+        where id = #{id}
+    </delete>
+
+    <update id="update">
+        update user_role
+        set
+        user_id = #{userId},
+        role_id = #{roleId},
+        where id = #{id}
+    </update>
+
+<!--    自定义功能-->
+    <insert id="saveBatch" parameterType="com.liuyong.simplems.system.ent.UserRole">
+        insert into user_role(user_id, role_id)
+        values
+        <foreach collection="list" item="userRole" index="index" separator=",">
+            (#{userRole.userId}, #{userRole.roleId})
+        </foreach>
+    </insert>
+
+    <delete id="removeByUserId">
+        delete
+        from user_role
+        where user_id = #{useId}
+    </delete>
+</mapper>
