@@ -8,5 +8,5 @@ import java.util.List;
 public interface UserRoleMapper extends BaseMapper<UserRole> {
     int saveBatch(List<UserRole> userRoleList);
 
-    int removeUserRole(int userId);
+    int removeByUserId(int userId);
 }

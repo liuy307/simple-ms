@@ -3,6 +3,7 @@ package com.liuyong.simplems.system.service.impl;
 import com.liuyong.simplems.common.base.BaseServiceImpl;
 import com.liuyong.simplems.system.dao.RoleMapper;
 import com.liuyong.simplems.system.dao.UserMapper;
+import com.liuyong.simplems.system.dao.UserRoleMapper;
 import com.liuyong.simplems.system.ent.LoginInfo;
 import com.liuyong.simplems.system.ent.User;
 import com.liuyong.simplems.system.ent.UserRole;
@@ -19,6 +20,9 @@ import java.util.List;
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService{
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    UserRoleMapper userRoleMapper;
 
     @Autowired
     RoleMapper roleMapper;
@@ -53,7 +57,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
             userRole.setRoleId(roleIdList.get(i));
             userRoleList.add(userRole);
         }
-        int flag2 = userMapper.saveUserRoleBatch(userRoleList);
+        int flag2 = userRoleMapper.saveBatch(userRoleList);
         return (flag1>0&&flag2>0 ? flag2:0);
     }
 
@@ -62,7 +66,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     @Transactional(rollbackFor = Exception.class)
     public int removeUserAndUserRole(int userId) {
         int flag1 = userMapper.remove(userId);
-        int flag2 = userMapper.removeUserRole(userId);
+        int flag2 = userRoleMapper.removeByUserId(userId);
         return (flag1>0&&flag2>0 ? flag2:0);
     }
 
@@ -73,7 +77,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
         int flag1 = userMapper.update(user);
         int userId = user.getId();
 
-        int flag2 = userMapper.removeUserRole(userId);
+        int flag2 = userRoleMapper.removeByUserId(userId);
 
         List<String> roleNameList = user.getRoleNameList();
         List<Integer> roleIdList = roleMapper.getIdByNameBatch(roleNameList);
@@ -85,7 +89,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
             userRole.setRoleId(roleIdList.get(i));
             userRoleList.add(userRole);
         }
-        int flag3 = userMapper.saveUserRoleBatch(userRoleList);
+        int flag3 = userRoleMapper.saveBatch(userRoleList);
         return (flag1>0&&flag2>0&&flag3>0 ? flag3:0);
     }
 

@@ -5,6 +5,7 @@ import com.liuyong.simplems.common.core.model.ApiResponse;
 import com.liuyong.simplems.common.core.utils.JWTUtil;
 import com.liuyong.simplems.system.ent.LoginInfo;
 import com.liuyong.simplems.system.ent.User;
+import com.liuyong.simplems.system.ent.UserInfo;
 import com.liuyong.simplems.system.service.MenuService;
 import com.liuyong.simplems.system.service.RoleService;
 import com.liuyong.simplems.system.service.UserService;
@@ -38,13 +39,17 @@ public class LoginController extends ExceptionHandlerController {
         }
 
         String token = JWTUtil.sign(loginInfo.getAccountNumber(), loginInfo.getPassword());
-        return  ApiResponse.success(token);
+        user.setPassword("this is a secret");
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUser(user);
+        userInfo.setToken(token);
+        return  ApiResponse.success(userInfo);
     }
 
     @ApiOperation("用户信息")
     @PostMapping("/getUserInfo")
     public ApiResponse getUserInfo(LoginInfo loginInfo) {
-
+        return null;
     }
 }
 

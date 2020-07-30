@@ -1,7 +1,9 @@
 package com.liuyong.simplems;
 
 import com.liuyong.simplems.system.dao.RoleMapper;
+import com.liuyong.simplems.system.dao.UserRoleMapper;
 import com.liuyong.simplems.system.ent.Menu;
+import com.liuyong.simplems.system.ent.UserRole;
 import com.liuyong.simplems.system.service.MenuService;
 import com.liuyong.simplems.system.service.RoleService;
 import com.liuyong.simplems.system.service.UserService;
@@ -24,6 +26,9 @@ class SimpleMsApplicationTests {
     @Autowired
     MenuService menuService;
 
+    @Autowired
+    UserRoleMapper userRoleMapper;
+
     @Test
     void contextLoads() {
 //        roleMapper.listRoleMenus();
@@ -45,5 +50,12 @@ class SimpleMsApplicationTests {
 //        }
 
         List<Menu> allMenus = menuService.list();
+    }
+
+    @Test
+    void testUserRoleMapper() {
+        List<UserRole>userRoleList = userRoleMapper.list();
+        userRoleMapper.saveBatch(userRoleList);
+        userRoleMapper.removeByUserId(3);
     }
 }

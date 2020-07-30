@@ -11,11 +11,8 @@ import java.util.List;
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
     List<User> listUserRoles();
+
     User getUserRoleById(int id);
-
-    int saveUserRoleBatch(List<UserRole> userRoleList);
-
-    int removeUserRole(int userId);
 
     List<User> listUserRoleMenusByLoginInfo(LoginInfo loginInfo);
 }

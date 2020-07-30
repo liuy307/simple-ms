@@ -8,11 +8,11 @@ import java.io.Serializable;
 
 @Data
 @ApiModel("用户登录信息")
-public class LoginInfo  implements Serializable {
-    @ApiModelProperty("账号")
-    private String accountNumber;
+public class UserInfo implements Serializable {
+    @ApiModelProperty("用户")
+    private User user;
 
-    @ApiModelProperty("密码")
-    private String password;
+    @ApiModelProperty("token")
+    private String token;
 //
 }

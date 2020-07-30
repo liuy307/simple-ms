@@ -3,6 +3,7 @@ package com.liuyong.simplems.system.service.impl;
 import com.liuyong.simplems.common.base.BaseServiceImpl;
 import com.liuyong.simplems.system.dao.MenuMapper;
 import com.liuyong.simplems.system.dao.RoleMapper;
+import com.liuyong.simplems.system.dao.RoleMenuMapper;
 import com.liuyong.simplems.system.ent.Role;
 import com.liuyong.simplems.system.ent.RoleMenu;
 import com.liuyong.simplems.system.service.RoleService;
@@ -18,6 +19,9 @@ import java.util.List;
 public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleService {
     @Autowired
     RoleMapper roleMapper;
+
+    @Autowired
+    RoleMenuMapper roleMenuMapper;
 
     @Autowired
     MenuMapper menuMapper;
@@ -51,7 +55,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
             roleMenu.setMenuId(menuIdList.get(i));
             roleMenuList.add(roleMenu);
         }
-        int flag2 = roleMapper.saveRoleMenuBatch(roleMenuList);
+        int flag2 = roleMenuMapper.saveBatch(roleMenuList);
         return (flag1>0&&flag2>0 ? flag2:0);
     }
 
@@ -60,7 +64,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
     @Transactional(rollbackFor = Exception.class)
     public int removeRoleAndRoleMenu(int roleId) {
         int flag1 = roleMapper.remove(roleId);
-        int flag2 = roleMapper.removeRoleMenu(roleId);
+        int flag2 = roleMenuMapper.removeByRoleId(roleId);
         return (flag1>0&&flag2>0 ? flag2:0);
     }
 
@@ -71,7 +75,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
         int flag1 = roleMapper.update(role);
         int roleId = role.getId();
 
-        int flag2 = roleMapper.removeRoleMenu(roleId);
+        int flag2 = roleMenuMapper.removeByRoleId(roleId);
 
         List<String> menuNameList = role.getMenuNameList();
         List<Integer> menuIdList = menuMapper.getIdByNameBatch(menuNameList);
@@ -84,7 +88,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
             roleMenu.setMenuId(menuIdList.get(i));
             roleMenuList.add(roleMenu);
         }
-        int flag3 = roleMapper.saveRoleMenuBatch(roleMenuList);
+        int flag3 = roleMenuMapper.saveBatch(roleMenuList);
         return (flag1>0&&flag2>0&&flag3>0 ? flag3:0);
     }
 }
