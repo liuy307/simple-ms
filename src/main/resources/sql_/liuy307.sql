@@ -11,7 +11,7 @@
  Target Server Version : 50515
  File Encoding         : 65001
 
- Date: 29/07/2020 18:24:39
+ Date: 30/07/2020 18:16:27
 */
 
 SET NAMES utf8mb4;
@@ -24,6 +24,7 @@ DROP TABLE IF EXISTS `menu`;
 CREATE TABLE `menu`  (
   `id` int(32) NOT NULL AUTO_INCREMENT,
   `menu_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `path` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `description` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `parent_menu_id` int(32) DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
@@ -33,15 +34,15 @@ CREATE TABLE `menu`  (
 -- ----------------------------
 -- Records of menu
 -- ----------------------------
-INSERT INTO `menu` VALUES (1, '系统管理', NULL, -1);
-INSERT INTO `menu` VALUES (2, '业务管理', NULL, -1);
-INSERT INTO `menu` VALUES (3, '人员管理', NULL, 1);
-INSERT INTO `menu` VALUES (4, '角色管理', NULL, 1);
-INSERT INTO `menu` VALUES (5, '菜单管理', NULL, 1);
-INSERT INTO `menu` VALUES (6, '业务1', NULL, 2);
-INSERT INTO `menu` VALUES (7, '业务2', NULL, 2);
-INSERT INTO `menu` VALUES (8, '业务1-1', NULL, 6);
-INSERT INTO `menu` VALUES (9, '业务1-2', NULL, 6);
+INSERT INTO `menu` VALUES (1, '系统管理', '/system', NULL, -1);
+INSERT INTO `menu` VALUES (2, '业务管理', '/service', NULL, -1);
+INSERT INTO `menu` VALUES (3, '人员管理', '/system/user', NULL, 1);
+INSERT INTO `menu` VALUES (4, '角色管理', '/system/role', NULL, 1);
+INSERT INTO `menu` VALUES (5, '菜单管理', '/system/menu', NULL, 1);
+INSERT INTO `menu` VALUES (6, '业务1', '/service/s1', NULL, 2);
+INSERT INTO `menu` VALUES (7, '业务2', '/service/s2', NULL, 2);
+INSERT INTO `menu` VALUES (8, '业务1-1', '/service/s1/c1', NULL, 6);
+INSERT INTO `menu` VALUES (9, '业务1-2', '/service/s1/c2', NULL, 6);
 
 -- ----------------------------
 -- Table structure for role
