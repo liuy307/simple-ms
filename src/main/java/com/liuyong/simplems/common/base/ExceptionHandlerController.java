@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Slf4j
 public abstract class ExceptionHandlerController {
@@ -17,26 +18,32 @@ public abstract class ExceptionHandlerController {
     public ModelAndView exceptionHandle(HttpServletRequest request, HttpServletResponse response, Exception ex){
         try {
             log.error(ex.getMessage(), ex);
+            response.setHeader("content-type", "text/html;charset=UTF-8");
+            response.getWriter().write(JSON.toJSONString(ApiResponse.failed(ex.getMessage())));
+
             // 如果为异步请求，返回ApiResponse对象
-            if(this.isAjax(request)){
-                response.setHeader("content-type", "text/html;charset=UTF-8");
-                response.getWriter().write(JSON.toJSONString(ApiResponse.failed(ex.getMessage())));
-                return null;
-            }
-            // 跳转至error页面
-            ModelMap model = new ModelMap();
-            model.addAttribute("error", ex.getMessage());
-            return new ModelAndView("error/default", model);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            ModelMap model = new ModelMap();
-            model.addAttribute("error", "未知异常");
-            return new ModelAndView("error/default", model);
+//            if(this.isAjax(request)){
+//                response.setHeader("content-type", "text/html;charset=UTF-8");
+//                response.getWriter().write(JSON.toJSONString(ApiResponse.failed(ex.getMessage())));
+//                return null;
+//            }
+//            // 跳转至error页面
+//            ModelMap model = new ModelMap();
+//            model.addAttribute("error", ex.getMessage());
+//            return new ModelAndView("error/default", model);
+//        } catch (Exception e) {
+//            log.error(e.getMessage(), e);
+//            ModelMap model = new ModelMap();
+//            model.addAttribute("error", "未知异常");
+//            return new ModelAndView("error/default", model);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return null;
     }
 
     // 判断请求是否为异步
-    private boolean isAjax(HttpServletRequest request){
-        return StringUtils.isNotBlank(request.getHeader("X-Requested-With"));
-    }
+//    private boolean isAjax(HttpServletRequest request){
+//        return StringUtils.isNotBlank(request.getHeader("X-Requested-With"));
+//    }
 }

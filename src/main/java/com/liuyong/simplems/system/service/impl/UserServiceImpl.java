@@ -8,6 +8,7 @@ import com.liuyong.simplems.system.ent.LoginInfo;
 import com.liuyong.simplems.system.ent.User;
 import com.liuyong.simplems.system.ent.UserRole;
 import com.liuyong.simplems.system.service.UserService;
+import org.apache.shiro.authc.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -96,5 +97,10 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     @Override
     public List<User> listUserRoleMenusByLoginInfo(LoginInfo loginInfo) {
         return userMapper.listUserRoleMenusByLoginInfo(loginInfo);
+    }
+
+    @Override
+    public List<User> listUserRoleMenusByAccount(String account) {
+        return userMapper.listUserRoleMenusByAccount(account);
     }
 }

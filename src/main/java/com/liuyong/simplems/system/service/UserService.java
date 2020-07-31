@@ -3,6 +3,7 @@ package com.liuyong.simplems.system.service;
 import com.liuyong.simplems.common.base.BaseService;
 import com.liuyong.simplems.system.ent.LoginInfo;
 import com.liuyong.simplems.system.ent.User;
+import org.apache.shiro.authc.Account;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface UserService extends BaseService<User> {
     int updateUserAndUserRole(User user);
 
     List<User> listUserRoleMenusByLoginInfo(LoginInfo loginInfo);
+
+    List<User> listUserRoleMenusByAccount(String account);
 }

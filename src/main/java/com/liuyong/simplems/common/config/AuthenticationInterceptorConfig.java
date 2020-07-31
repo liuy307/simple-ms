@@ -1,19 +1,17 @@
-package com.pjb.springbootjjwt.config;
+package com.liuyong.simplems.common.config;
 
-import com.pjb.springbootjjwt.interceptor.AuthenticationInterceptor;
-import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
+import com.liuyong.simplems.common.interceptor.AuthenticationInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * @author jinbin
  * @date 2018-07-08 22:33
  */
 @Configuration
-public class InterceptorConfig implements WebMvcConfigurer {
+public class AuthenticationInterceptorConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authenticationInterceptor())

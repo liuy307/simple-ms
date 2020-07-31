@@ -20,7 +20,7 @@ public class User implements Serializable {
     private String description;
 
     @ApiModelProperty("账号")
-    private String accountNumber;
+    private String account;
 
     @ApiModelProperty("密码")
     private String password;

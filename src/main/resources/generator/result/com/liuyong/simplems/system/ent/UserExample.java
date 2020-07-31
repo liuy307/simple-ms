@@ -304,73 +304,73 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andAccountNumberIsNull() {
-            addCriterion("account_number is null");
+        public Criteria andaccountIsNull() {
+            addCriterion("account is null");
             return (Criteria) this;
         }
 
-        public Criteria andAccountNumberIsNotNull() {
-            addCriterion("account_number is not null");
+        public Criteria andaccountIsNotNull() {
+            addCriterion("account is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAccountNumberEqualTo(String value) {
-            addCriterion("account_number =", value, "accountNumber");
+        public Criteria andaccountEqualTo(String value) {
+            addCriterion("account =", value, "account");
             return (Criteria) this;
         }
 
-        public Criteria andAccountNumberNotEqualTo(String value) {
-            addCriterion("account_number <>", value, "accountNumber");
+        public Criteria andaccountNotEqualTo(String value) {
+            addCriterion("account <>", value, "account");
             return (Criteria) this;
         }
 
-        public Criteria andAccountNumberGreaterThan(String value) {
-            addCriterion("account_number >", value, "accountNumber");
+        public Criteria andaccountGreaterThan(String value) {
+            addCriterion("account >", value, "account");
             return (Criteria) this;
         }
 
-        public Criteria andAccountNumberGreaterThanOrEqualTo(String value) {
-            addCriterion("account_number >=", value, "accountNumber");
+        public Criteria andaccountGreaterThanOrEqualTo(String value) {
+            addCriterion("account >=", value, "account");
             return (Criteria) this;
         }
 
-        public Criteria andAccountNumberLessThan(String value) {
-            addCriterion("account_number <", value, "accountNumber");
+        public Criteria andaccountLessThan(String value) {
+            addCriterion("account <", value, "account");
             return (Criteria) this;
         }
 
-        public Criteria andAccountNumberLessThanOrEqualTo(String value) {
-            addCriterion("account_number <=", value, "accountNumber");
+        public Criteria andaccountLessThanOrEqualTo(String value) {
+            addCriterion("account <=", value, "account");
             return (Criteria) this;
         }
 
-        public Criteria andAccountNumberLike(String value) {
-            addCriterion("account_number like", value, "accountNumber");
+        public Criteria andaccountLike(String value) {
+            addCriterion("account like", value, "account");
             return (Criteria) this;
         }
 
-        public Criteria andAccountNumberNotLike(String value) {
-            addCriterion("account_number not like", value, "accountNumber");
+        public Criteria andaccountNotLike(String value) {
+            addCriterion("account not like", value, "account");
             return (Criteria) this;
         }
 
-        public Criteria andAccountNumberIn(List<String> values) {
-            addCriterion("account_number in", values, "accountNumber");
+        public Criteria andaccountIn(List<String> values) {
+            addCriterion("account in", values, "account");
             return (Criteria) this;
         }
 
-        public Criteria andAccountNumberNotIn(List<String> values) {
-            addCriterion("account_number not in", values, "accountNumber");
+        public Criteria andaccountNotIn(List<String> values) {
+            addCriterion("account not in", values, "account");
             return (Criteria) this;
         }
 
-        public Criteria andAccountNumberBetween(String value1, String value2) {
-            addCriterion("account_number between", value1, value2, "accountNumber");
+        public Criteria andaccountBetween(String value1, String value2) {
+            addCriterion("account between", value1, value2, "account");
             return (Criteria) this;
         }
 
-        public Criteria andAccountNumberNotBetween(String value1, String value2) {
-            addCriterion("account_number not between", value1, value2, "accountNumber");
+        public Criteria andaccountNotBetween(String value1, String value2) {
+            addCriterion("account not between", value1, value2, "account");
             return (Criteria) this;
         }
 

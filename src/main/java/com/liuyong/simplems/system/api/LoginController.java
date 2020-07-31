@@ -1,5 +1,6 @@
 package com.liuyong.simplems.system.api;
 
+import com.liuyong.simplems.common.annotation.UserLoginToken;
 import com.liuyong.simplems.common.base.ExceptionHandlerController;
 import com.liuyong.simplems.common.core.model.ApiResponse;
 import com.liuyong.simplems.common.core.utils.JWTUtil;
@@ -38,7 +39,7 @@ public class LoginController extends ExceptionHandlerController {
             return ApiResponse.failed("密码不正确！");
         }
 
-        String token = JWTUtil.sign(loginInfo.getAccountNumber(), loginInfo.getPassword());
+        String token = JWTUtil.sign(loginInfo.getAccount(), loginInfo.getPassword());
         user.setPassword("this is a secret");
         UserInfo userInfo = new UserInfo();
         userInfo.setUser(user);
@@ -48,8 +49,9 @@ public class LoginController extends ExceptionHandlerController {
 
     @ApiOperation("用户信息")
     @PostMapping("/getUserInfo")
+    @UserLoginToken
     public ApiResponse getUserInfo(LoginInfo loginInfo) {
-        return null;
+        return ApiResponse.success(loginInfo);
     }
 }
 

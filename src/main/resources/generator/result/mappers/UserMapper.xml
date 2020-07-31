@@ -5,7 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="account_number" jdbcType="VARCHAR" property="accountNumber" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
     <result column="password" jdbcType="VARCHAR" property="password" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -67,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_name, description, account_number, password
+    id, user_name, description, account, password
   </sql>
   <select id="selectByExample" parameterType="com.liuyong.simplems.system.ent.UserExample" resultMap="BaseResultMap">
     select
@@ -103,9 +103,9 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into user (user_name, description, account_number, 
+    insert into user (user_name, description, account,
       password)
-    values (#{userName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{accountNumber,jdbcType=VARCHAR}, 
+    values (#{userName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR},
       #{password,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.liuyong.simplems.system.ent.User">
@@ -120,8 +120,8 @@
       <if test="description != null">
         description,
       </if>
-      <if test="accountNumber != null">
-        account_number,
+      <if test="account != null">
+        account,
       </if>
       <if test="password != null">
         password,
@@ -134,8 +134,8 @@
       <if test="description != null">
         #{description,jdbcType=VARCHAR},
       </if>
-      <if test="accountNumber != null">
-        #{accountNumber,jdbcType=VARCHAR},
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
@@ -160,8 +160,8 @@
       <if test="record.description != null">
         description = #{record.description,jdbcType=VARCHAR},
       </if>
-      <if test="record.accountNumber != null">
-        account_number = #{record.accountNumber,jdbcType=VARCHAR},
+      <if test="record.account != null">
+        account = #{record.account,jdbcType=VARCHAR},
       </if>
       <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
@@ -176,7 +176,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       user_name = #{record.userName,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR},
-      account_number = #{record.accountNumber,jdbcType=VARCHAR},
+      account = #{record.account,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -191,8 +191,8 @@
       <if test="description != null">
         description = #{description,jdbcType=VARCHAR},
       </if>
-      <if test="accountNumber != null">
-        account_number = #{accountNumber,jdbcType=VARCHAR},
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
@@ -204,7 +204,7 @@
     update user
     set user_name = #{userName,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
-      account_number = #{accountNumber,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -212,7 +212,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="account_number" jdbcType="VARCHAR" property="accountNumber" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
     <result column="password" jdbcType="VARCHAR" property="password" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -274,7 +274,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_name, description, account_number, password
+    id, user_name, description, account, password
   </sql>
   <select id="selectByExample" parameterType="com.liuyong.simplems.system.ent.UserExample" resultMap="BaseResultMap">
     select
@@ -310,9 +310,9 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into user (user_name, description, account_number, 
+    insert into user (user_name, description, account,
       password)
-    values (#{userName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{accountNumber,jdbcType=VARCHAR}, 
+    values (#{userName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR},
       #{password,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.liuyong.simplems.system.ent.User">
@@ -327,8 +327,8 @@
       <if test="description != null">
         description,
       </if>
-      <if test="accountNumber != null">
-        account_number,
+      <if test="account != null">
+        account,
       </if>
       <if test="password != null">
         password,
@@ -341,8 +341,8 @@
       <if test="description != null">
         #{description,jdbcType=VARCHAR},
       </if>
-      <if test="accountNumber != null">
-        #{accountNumber,jdbcType=VARCHAR},
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
@@ -367,8 +367,8 @@
       <if test="record.description != null">
         description = #{record.description,jdbcType=VARCHAR},
       </if>
-      <if test="record.accountNumber != null">
-        account_number = #{record.accountNumber,jdbcType=VARCHAR},
+      <if test="record.account != null">
+        account = #{record.account,jdbcType=VARCHAR},
       </if>
       <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
@@ -383,7 +383,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       user_name = #{record.userName,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR},
-      account_number = #{record.accountNumber,jdbcType=VARCHAR},
+      account = #{record.account,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -398,8 +398,8 @@
       <if test="description != null">
         description = #{description,jdbcType=VARCHAR},
       </if>
-      <if test="accountNumber != null">
-        account_number = #{accountNumber,jdbcType=VARCHAR},
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
@@ -411,7 +411,7 @@
     update user
     set user_name = #{userName,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
-      account_number = #{accountNumber,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>

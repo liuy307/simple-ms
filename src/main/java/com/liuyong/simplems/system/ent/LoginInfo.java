@@ -10,7 +10,7 @@ import java.io.Serializable;
 @ApiModel("用户登录信息")
 public class LoginInfo  implements Serializable {
     @ApiModelProperty("账号")
-    private String accountNumber;
+    private String account;
 
     @ApiModelProperty("密码")
     private String password;

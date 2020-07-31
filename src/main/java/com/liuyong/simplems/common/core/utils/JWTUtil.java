@@ -54,17 +54,18 @@ public class JWTUtil {
     /**
      * 生成 token
      *
-     * @param username 用户名
-     * @param secret   用户的密码
+     * @param account 用户名
+     * @param password   用户的密码
      * @return token
      */
-    public static String sign(String username, String secret) {
+    public static String sign(String account, String password) {
         try {
             Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
-            Algorithm algorithm = Algorithm.HMAC256(secret);
+            Algorithm algorithm = Algorithm.HMAC256(password);
             return JWT.create()
-                    .withClaim("username", username)
-                    .withExpiresAt(date)
+                    .withAudience("account", account)
+//                    .withClaim("account", account)
+//                    .withExpiresAt(date)
                     .sign(algorithm);
         } catch (Exception e) {
             log.error("error：{}", e);

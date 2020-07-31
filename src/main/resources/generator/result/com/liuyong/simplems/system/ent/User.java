@@ -7,7 +7,7 @@ public class User {
 
     private String description;
 
-    private String accountNumber;
+    private String account;
 
     private String password;
 
@@ -35,12 +35,12 @@ public class User {
         this.description = description == null ? null : description.trim();
     }
 
-    public String getAccountNumber() {
-        return accountNumber;
+    public String getaccount() {
+        return account;
     }
 
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber == null ? null : accountNumber.trim();
+    public void setaccount(String account) {
+        this.account = account == null ? null : account.trim();
     }
 
     public String getPassword() {

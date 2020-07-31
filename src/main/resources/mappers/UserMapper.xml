@@ -19,8 +19,8 @@
         <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
             SELECT LAST_INSERT_ID()
         </selectKey>
-        insert into user(user_name, description, account_number, password)
-        values (#{userName}, #{description}, #{accountNumber}, #{password})
+        insert into user(user_name, description, account, password)
+        values (#{userName}, #{description}, #{account}, #{password})
     </insert>
 
     <delete id="remove">
@@ -34,7 +34,7 @@
         set id = #{id},
         user_name = #{userName},
         description = #{description},
-        account_number = #{accountNumber},
+        account = #{account},
         password = #{password}
         where id = #{id}
     </update>
@@ -44,7 +44,7 @@
         <id column="id" jdbcType="INTEGER" property="id" />
         <result column="user_name" jdbcType="VARCHAR" property="userName" />
         <result column="description" jdbcType="VARCHAR" property="description" />
-        <result column="account_number" jdbcType="VARCHAR" property="accountNumber" />
+        <result column="account" jdbcType="VARCHAR" property="account" />
         <result column="password" jdbcType="VARCHAR" property="password" />
         <collection property="roleList" ofType="com.liuyong.simplems.system.ent.Role">
             <id column="r_id" jdbcType="INTEGER" property="id" />
@@ -99,6 +99,16 @@
         left join role as r on ur.role_id = r.id
         left join role_menu as rm on r.id = rm.role_id
         left join menu as m on rm.menu_id = m.id
-        where u.account_number = #{accountNumber}
+        where u.account = #{account}
+    </select>
+
+    <select id="listUserRoleMenusByAccount" parameterType="java.lang.String" resultMap="UserRoleMap">
+        select u.*, r.id as r_id, r.role_name, r.description as r_description, m.id as m_id, m.menu_name, m.description as m_description, m.parent_menu_id
+        from user as u
+        left join user_role as ur on u.id = ur.user_id
+        left join role as r on ur.role_id = r.id
+        left join role_menu as rm on r.id = rm.role_id
+        left join menu as m on rm.menu_id = m.id
+        where u.account = #{account}
     </select>
 </mapper>
