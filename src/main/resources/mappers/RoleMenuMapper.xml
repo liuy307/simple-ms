@@ -3,10 +3,10 @@
 <mapper namespace="com.liuyong.simplems.system.dao.RoleMenuMapper">
 <!--    自定义功能-->
     <insert id="saveBatch" parameterType="com.liuyong.simplems.system.ent.RoleMenu">
-        insert into role_menu(role_id, menus_id)
+        insert into role_menu(role_id, menu_id)
         values
         <foreach collection="list" item="roleMenu" index="index" separator=",">
-            (#{roleMenu.roleId}, #{roleMenu.menusId})
+            (#{roleMenu.roleId}, #{roleMenu.menuId})
         </foreach>
     </insert>
 

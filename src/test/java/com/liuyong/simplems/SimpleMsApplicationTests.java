@@ -1,8 +1,11 @@
 package com.liuyong.simplems;
 
 import com.liuyong.simplems.system.dao.RoleMapper;
+import com.liuyong.simplems.system.dao.UserMapper;
 import com.liuyong.simplems.system.dao.UserRoleMapper;
+import com.liuyong.simplems.system.ent.LoginInfo;
 import com.liuyong.simplems.system.ent.Menu;
+import com.liuyong.simplems.system.ent.User;
 import com.liuyong.simplems.system.ent.UserRole;
 import com.liuyong.simplems.system.service.MenuService;
 import com.liuyong.simplems.system.service.RoleService;
@@ -29,12 +32,15 @@ class SimpleMsApplicationTests {
     @Autowired
     UserRoleMapper userRoleMapper;
 
+    @Autowired
+    UserMapper userMapper;
+
     @Test
     void contextLoads() {
-//        roleMapper.listRoleMenus();
-//        roleMapper.getRoleMenuById(1);
-        List<String> roleNameList = new ArrayList<>(Arrays.asList("超级管理员", "管理员"));
-//        List<Integer> roleIdList = roleService.getIdByNameBatch(roleNameList);
+        LoginInfo loginInfo = new LoginInfo();        loginInfo.setAccount("111");
+        loginInfo.setPassword("111");
+        List<User> users = userMapper.listUserRoleMenusPermissionsByLoginInfo(loginInfo);
+        System.out.println(users);
     }
 
     @Test
@@ -57,5 +63,14 @@ class SimpleMsApplicationTests {
         List<UserRole>userRoleList = userRoleMapper.list();
         userRoleMapper.saveBatch(userRoleList);
         userRoleMapper.removeByUserId(3);
+    }
+
+    @Test
+    void testLogin() {
+        LoginInfo loginInfo = new LoginInfo();
+        loginInfo.setAccount("111");
+        loginInfo.setPassword("111");
+        List<User> s = userService.listUserRoleMenusByLoginInfo(loginInfo);
+        System.out.println(s);
     }
 }

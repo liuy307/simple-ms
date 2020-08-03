@@ -56,6 +56,11 @@
                 <result column="m_description" jdbcType="VARCHAR" property="description" />
                 <result column="parent_menu_id" jdbcType="VARCHAR" property="parentMenuId" />
             </collection>
+            <collection property="permissionList" ofType="com.liuyong.simplems.system.ent.Permission">
+                <id column="p_id" jdbcType="INTEGER" property="id" />
+                <result column="permission_name" jdbcType="VARCHAR" property="permissionName" />
+                <result column="p_description" jdbcType="VARCHAR" property="description" />
+            </collection>
         </collection>
     </resultMap>
 
@@ -111,4 +116,17 @@
         left join menu as m on rm.menu_id = m.id
         where u.account = #{account}
     </select>
+
+    <select id="listUserRoleMenusPermissionsByLoginInfo" parameterType="com.liuyong.simplems.system.ent.LoginInfo" resultMap="UserRoleMap">
+        select u.*, r.id as r_id, r.role_name, r.description as r_description, m.id as m_id, m.menu_name, m.description as m_description, m.parent_menu_id, p.id as p_id, p.permission_name, p.description as p_description
+        from user as u
+        left join user_role as ur on u.id = ur.user_id
+        left join role as r on ur.role_id = r.id
+        left join role_menu as rm on r.id = rm.role_id
+        left join menu as m on rm.menu_id = m.id
+        left join role_permission rp on r.id = rp.role_id
+        left join permission p on rp.permission_id = p.id
+        where u.account = #{account}
+    </select>
+
 </mapper>

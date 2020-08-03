@@ -1,6 +1,7 @@
 package com.liuyong.simplems.system.api;
 
 import com.liuyong.simplems.common.base.BaseController;
+import com.liuyong.simplems.common.base.ExceptionHandlerController;
 import com.liuyong.simplems.common.core.model.ApiResponse;
 import com.liuyong.simplems.system.ent.Role;
 import com.liuyong.simplems.system.service.RoleService;
@@ -16,10 +17,11 @@ import java.util.List;
 @RestController
 @RequestMapping("role")
 @Api(tags = "角色管理接口")
-public class RoleController extends BaseController<Role> {
+public class RoleController extends ExceptionHandlerController {
     @Autowired
     RoleService roleService;
 
+    // 角色菜单
     @ApiOperation("列出角色菜单信息")
     @PostMapping("/listRoleMenus")
     ApiResponse<List<Role>> listRoleMenus() {
@@ -49,6 +51,39 @@ public class RoleController extends BaseController<Role> {
     @PostMapping("/updateRoleAndRoleMenu")
     ApiResponse<Integer> updateRoleAndRoleMenu(Role user) {
         int flag = roleService.updateRoleAndRoleMenu(user);
+        return ApiResponse.success(flag);
+    }
+
+    // 角色权限
+    @ApiOperation("列出角色权限信息")
+    @PostMapping("/listRolePermissions")
+    ApiResponse<List<Role>> listRolePermissions() {
+        return ApiResponse.success(roleService.listRolePermissions());
+    }
+
+    @ApiOperation("列出角色权限信息(根据id)")
+    @PostMapping("/getRolePermissionById")
+    ApiResponse<Role> getRolePermissionById(int roleId) {
+        return ApiResponse.success(roleService.getRolePermissionById(roleId));
+    }
+
+    @ApiOperation("新增角色表和角色权限中间表信息")
+    @PostMapping("/saveRoleAndRolePermission")
+    ApiResponse<Integer> saveRoleAndRolePermission(Role user) {
+        int flag = roleService.saveRoleAndRolePermission(user);
+        return ApiResponse.success(flag);
+    }
+
+    @ApiOperation("删除角色表和角色权限中间表信息")
+    @PostMapping("/removeRoleAndRolePermission")
+    ApiResponse<Role> removeRoleAndRolePermission(int roleId) {
+        return ApiResponse.success(roleService.removeRoleAndRolePermission(roleId));
+    }
+
+    @ApiOperation("更新角色表和角色权限中间表信息")
+    @PostMapping("/updateRoleAndRolePermission")
+    ApiResponse<Integer> updateRoleAndRolePermission(Role user) {
+        int flag = roleService.updateRoleAndRolePermission(user);
         return ApiResponse.success(flag);
     }
 }

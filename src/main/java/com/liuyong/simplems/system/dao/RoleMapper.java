@@ -14,6 +14,9 @@ public interface RoleMapper extends BaseMapper<Role> {
     List<Role> listRoleMenus();
     Role getRoleMenuById(int id);
 
+    List<Role> listRolePermissions();
+    Role getRolePermissionById(int roleId);
+
 //    int saveRoleMenuBatch(List<RoleMenu> roleMenuList);
 //
 //    int removeRoleMenu(int userId);

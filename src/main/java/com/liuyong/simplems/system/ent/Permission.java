@@ -8,20 +8,14 @@ import java.io.Serializable;
 import java.util.List;
 
 @Data
-@ApiModel("菜单对象")
-public class Menu implements Serializable {
+@ApiModel("权限对象")
+public class Permission implements Serializable {
     @ApiModelProperty(value = "主键id", example = "1")
     private Integer id;
 
-    @ApiModelProperty("菜单名")
-    private String menuName;
+    @ApiModelProperty("权限名")
+    private String PermissionName;
 
     @ApiModelProperty("描述")
     private String description;
-
-    @ApiModelProperty(value = "父菜单Id", example = "0")
-    private int parentMenuId;
-
-    @ApiModelProperty("子菜单集合")
-    private List<Menu> childMenusList;
 }

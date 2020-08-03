@@ -18,4 +18,6 @@ public interface UserMapper extends BaseMapper<User> {
     List<User> listUserRoleMenusByLoginInfo(LoginInfo loginInfo);
 
     List<User> listUserRoleMenusByAccount(String account);
+
+    List<User> listUserRoleMenusPermissionsByLoginInfo(LoginInfo loginInfo);
 }

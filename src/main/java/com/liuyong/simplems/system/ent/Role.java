@@ -24,4 +24,10 @@ public class Role implements Serializable {
 
     @ApiModelProperty("角色分配菜单名字集合")
     private List<String> MenuNameList;
+
+    @ApiModelProperty("角色分配权限集合")
+    private List<Permission> PermissionList;
+
+    @ApiModelProperty("角色分配权限名字集合")
+    private List<String> PermissionNameList;
 }

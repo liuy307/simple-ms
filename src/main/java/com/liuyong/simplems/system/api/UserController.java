@@ -1,6 +1,7 @@
 package com.liuyong.simplems.system.api;
 
 import com.liuyong.simplems.common.base.BaseController;
+import com.liuyong.simplems.common.base.ExceptionHandlerController;
 import com.liuyong.simplems.common.core.model.ApiResponse;
 import com.liuyong.simplems.system.ent.User;
 import com.liuyong.simplems.system.service.UserService;
@@ -17,24 +18,9 @@ import java.util.List;
 @RestController
 @RequestMapping("user")
 @Api(tags = "用户管理接口")
-public class UserController extends BaseController<User>{
+public class UserController extends ExceptionHandlerController {
     @Autowired
     UserService userService;
-
-    /*
-     * @author : LiuYong
-     * @date : 2020/7/24
-     * @descrip: 新增人员，并返回新增人员Id
-     * @param user 1
-     * @return : ApiResponse<Integer>
-     */
-    @Override
-    @ApiOperation("Base新增改")
-    @PostMapping("/save")
-    public ApiResponse<Integer> save(User user) {
-        int i = userService.save(user);
-        return ApiResponse.success(user.getId());
-    }
 
     /*
      * @author : LiuYong
