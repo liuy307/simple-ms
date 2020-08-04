@@ -38,7 +38,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         if (isLoginAttempt(request, response)) {
             return executeLogin(request, response);
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -96,4 +96,16 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         }
         return false;
     }
+
+//    /**
+//     * 将非法请求跳转到 /401
+//     */
+//    private void response401(ServletRequest req, ServletResponse resp) {
+//        try {
+//            HttpServletResponse httpServletResponse = (HttpServletResponse) resp;
+//            httpServletResponse.sendRedirect("/401");
+//        } catch (IOException e) {
+//            log.error(e.getMessage());
+//        }
+//    }
 }

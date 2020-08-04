@@ -28,19 +28,31 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     @Autowired
     RoleMapper roleMapper;
 
-    // 列出用户角色关联结果表
+    /**
+     * @description: 查看用户角色表联合查询结果
+     * @param:
+     * @return:
+     */
     @Override
     public List<User> listUserRoles() {
         return userMapper.listUserRoles();
     }
 
-    // 获取用户角色关联结果表（根据Id）
+    /**
+     * @description: 查看用户角色表联合查询结果（通过用户id）
+     * @param:
+     * @return:
+     */
     @Override
     public User getUserRoleById(int userId) {
         return userMapper.getUserRoleById(userId);
     }
 
-    // 创建用户信息，用户角色中间表信息
+    /**
+     * @description: 创建用户表和用户角色中间表记录
+     * @param: user 用户信息
+     * @return: int 受影响记录条数
+     */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int saveUserAndUserRole(User user) {
@@ -62,7 +74,11 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
         return (flag1>0&&flag2>0 ? flag2:0);
     }
 
-    // 删除用户信息，用户角色中间表信息
+    /**
+     * @description: 删除用户表和用户角色中间表记录
+     * @param: userId 用户Id
+     * @return: int 受影响记录条数
+     */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int removeUserAndUserRole(int userId) {
@@ -71,7 +87,11 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
         return (flag1>0&&flag2>0 ? flag2:0);
     }
 
-    // 更新用户信息，用户角色中间表信息
+    /**
+     * @description: 更新用户表和用户角色中间表记录
+     * @param: user 用户信息
+     * @return: int 受影响记录条数
+     */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int updateUserAndUserRole(User user) {
@@ -94,11 +114,21 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
         return (flag1>0&&flag2>0&&flag3>0 ? flag3:0);
     }
 
+    /**
+     * @description: 返回用户角色菜单联合查询结果（通过用户登录信息）
+     * @param: loginInfo 用户登录信息
+     * @return:
+     */
     @Override
     public List<User> listUserRoleMenusByLoginInfo(LoginInfo loginInfo) {
         return userMapper.listUserRoleMenusByLoginInfo(loginInfo);
     }
 
+    /**
+     * @description: 返回用户角色菜单联合查询结果（通过用户账号）
+     * @param: account 用户账号
+     * @return:
+     */
     @Override
     public List<User> listUserRoleMenusByAccount(String account) {
         return userMapper.listUserRoleMenusByAccount(account);

@@ -22,13 +22,7 @@ public class UserController extends ExceptionHandlerController {
     @Autowired
     UserService userService;
 
-    /*
-     * @author : LiuYong
-     * @date : 2020/7/24
-     * @descrip:列出人员角色信息
-     * @param  null
-     * @return : ApiResponse
-     */
+
     @ApiOperation("列出人员角色信息")
     @PostMapping("/listUserRoles")
     ApiResponse<List<User>> listUserRoles() {
