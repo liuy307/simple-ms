@@ -18,4 +18,8 @@ import java.util.List;
 @RequestMapping("permission")
 @Api(tags = "权限管理接口")
 public class PermissionController extends BaseController<Permission> {
+    @Override
+    public ApiResponse<Integer> remove(int id) {
+        return super.remove(id);
+    }
 }

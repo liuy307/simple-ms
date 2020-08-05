@@ -15,6 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * 用户管理接口
+ *
+ * @author liuyong
+ * @date 2020/8/5 13:13
+ */
 @RestController
 @RequestMapping("user")
 @Api(tags = "用户管理接口")
@@ -22,33 +28,18 @@ public class UserController extends ExceptionHandlerController {
     @Autowired
     UserService userService;
 
-
     @ApiOperation("列出人员角色信息")
     @PostMapping("/listUserRoles")
     ApiResponse<List<User>> listUserRoles() {
         return ApiResponse.success(userService.listUserRoles());
     }
 
-    /*
-     * @author : LiuYong
-     * @date : 2020/7/24
-     * @descrip:获取人员角色信息(根据id)
-     * @param  int useId
-     * @return : ApiResponse
-     */
     @ApiOperation("获取人员角色信息(根据id)")
     @PostMapping("/getUserRoleById")
     ApiResponse<User> getUserRoleById(int useId) {
         return ApiResponse.success(userService.getUserRoleById(useId));
     }
 
-    /*
-     * @author : LiuYong
-     * @date : 2020/7/24
-     * @descrip:新增用户表和用户角色中间表信息
-     * @param  User user
-     * @return : ApiResponse<User>
-     */
     @ApiOperation("新增用户表和用户角色中间表信息")
     @PostMapping("/saveUserAndUserRole")
     ApiResponse<Integer> saveUserAndUserRole(@RequestBody User user) {
@@ -56,26 +47,12 @@ public class UserController extends ExceptionHandlerController {
         return ApiResponse.success(flag);
     }
 
-    /*
-     * @author : LiuYong
-     * @date : 2020/7/24
-     * @descrip:删除用户表和用户角色中间表信息
-     * @param  int useId
-     * @return : ApiResponse
-     */
     @ApiOperation("删除用户表和用户角色中间表信息")
     @PostMapping("/removeUserAndUserRole")
     ApiResponse removeUserAndUserRole(int useId) {
         return ApiResponse.success(userService.removeUserAndUserRole(useId));
     }
 
-    /*
-     * @author : LiuYong
-     * @date : 2020/7/24
-     * @descrip:更新用户表和用户角色中间表信息
-     * @param  User user
-     * @return : ApiResponse
-     */
     @ApiOperation("更新用户表和用户角色中间表信息")
     @PostMapping("/updateUserAndUserRole")
     ApiResponse<Integer> updateUserAndUserRole(User user) {

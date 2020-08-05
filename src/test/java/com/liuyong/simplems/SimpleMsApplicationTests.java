@@ -7,6 +7,7 @@ import com.liuyong.simplems.system.ent.LoginInfo;
 import com.liuyong.simplems.system.ent.Menu;
 import com.liuyong.simplems.system.ent.User;
 import com.liuyong.simplems.system.ent.UserRole;
+import com.liuyong.simplems.system.manager.UserManager;
 import com.liuyong.simplems.system.service.MenuService;
 import com.liuyong.simplems.system.service.RoleService;
 import com.liuyong.simplems.system.service.UserService;
@@ -17,6 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 @SpringBootTest
 class SimpleMsApplicationTests {
@@ -34,6 +36,9 @@ class SimpleMsApplicationTests {
 
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    UserManager userManager;
 
     @Test
     void contextLoads() {
@@ -72,5 +77,14 @@ class SimpleMsApplicationTests {
         loginInfo.setPassword("111");
         List<User> s = userService.listUserRoleMenusByLoginInfo(loginInfo);
         System.out.println(s);
+    }
+
+    @Test
+    void testUserManager() {
+        String account = "111";
+        User user = userManager.getUser(account);
+        Set<String> roleNames = userManager.getRoleNameSet(account);
+        Set<String> permissionNames = userManager.getPermissionNameSet(account);
+        Set<String> menuNames = userManager.getMenuNameSet(account);
     }
 }

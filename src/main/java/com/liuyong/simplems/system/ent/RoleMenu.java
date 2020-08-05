@@ -7,7 +7,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-@ApiModel("角色菜单关联对象")
+@ApiModel("角色菜单中间表对象")
 public class RoleMenu implements Serializable {
     @ApiModelProperty(value = "主键id", example = "1")
     private Integer id;

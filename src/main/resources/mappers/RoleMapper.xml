@@ -21,7 +21,6 @@
         where id = #{id}
     </select>
 
-
     <insert id="save" parameterType="com.liuyong.simplems.system.ent.Role" >
         <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
             SELECT LAST_INSERT_ID()
@@ -44,14 +43,23 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
 
+<!--    自定义实现-->
     <select id="getIdByNameBatch" resultType="java.lang.Integer">
         select
         id
         from role
         where role_name in
         <foreach collection="list" item="name" index="index" open="(" separator="," close=")">
-         #{name}
+            #{name}
         </foreach>
+    </select>
+
+    <select id="getRolesByAccount" resultType="java.lang.String" resultMap="BaseResultMap">
+        select r.id, r.role_name, r.description
+        from role as r
+        left join user_role as ur on r.id = ur.role_id
+        left join user as u on ur.user_id = u.id
+        where u.account = #{account}
     </select>
 
     <resultMap id="RoleMenuMap" type="com.liuyong.simplems.system.ent.Role">
@@ -107,18 +115,4 @@
         left join permission as p on rp.permission_id = p.id
         where r.id = #{id}
     </select>
-
-<!--    <insert id="saveRoleMenuBatch" parameterType="com.liuyong.simplems.system.ent.RoleMenu">-->
-<!--        insert into role_menu(role_id, menu_id)-->
-<!--        values-->
-<!--        <foreach collection="list" item="roleMenu" index="index" separator=",">-->
-<!--            (#{roleMenu.roleId}, #{roleMenu.menuId})-->
-<!--        </foreach>-->
-<!--    </insert>-->
-
-<!--    <delete id="removeRoleMenu">-->
-<!--        delete-->
-<!--        from role_menu-->
-<!--        where role_id = #{roleId}-->
-<!--    </delete>-->
 </mapper>

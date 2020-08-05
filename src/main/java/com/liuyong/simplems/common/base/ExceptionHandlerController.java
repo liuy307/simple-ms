@@ -12,6 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 全局异常捕捉Controller
+ *
+ * @author liuyong
+ * @date 2020/8/5 9:55
+ */
 @Slf4j
 public abstract class ExceptionHandlerController {
     @ExceptionHandler(Exception.class)

@@ -54,4 +54,14 @@
         </foreach>
     </select>
 
+    <select id="getPermissionNameSetByAccount" parameterType="java.lang.String" resultType="java.lang.String">
+        select distinct p.permission_name
+        from permission as p
+        left join role_permission as rp on p.id = rp.permission_id
+        left join role as r on rp.role_id = r.id
+        left join user_role as ur on r.id = ur.role_id
+        left join user as u on ur.user_id = u.id
+        where u.account = #{account,jdbcType=VARCHAR}
+    </select>
+
 </mapper>

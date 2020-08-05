@@ -31,22 +31,16 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
     @Autowired
     PermissionMapper permissionMapper;
 
-    /**
-     * 列出用户角色关联结果表
-     * @return
-     */
     @Override
     public List<Role> listRoleMenus() {
         return roleMapper.listRoleMenus();
     }
 
-    // 获取角色菜单关联结果表（根据Id）
     @Override
     public Role getRoleMenuById(int roleId) {
         return roleMapper.getRoleMenuById(roleId);
     }
 
-    // 创建角色信息，角色菜单中间表信息
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int saveRoleAndRoleMenu(Role role) {
@@ -68,7 +62,6 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
         return (flag1>0&&flag2>0 ? flag2:0);
     }
 
-    // 删除角色信息，角色菜单中间表信息
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int removeRoleAndRoleMenu(int roleId) {
@@ -77,7 +70,6 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
         return (flag1>0&&flag2>0 ? flag2:0);
     }
 
-    // 更新角色信息，角色菜单中间表信息
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int updateRoleAndRoleMenu(Role role) {
@@ -102,23 +94,16 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
         return (flag1>0&&flag2>0&&flag3>0 ? flag3:0);
     }
 
-    //角色权限
-    /**
-     * 列出角色权限关联结果表
-     * @return
-     */
     @Override
     public List<Role> listRolePermissions() {
         return roleMapper.listRolePermissions();
     }
 
-    // 获取角色权限关联结果表（根据Id）
     @Override
     public Role getRolePermissionById(int roleId) {
         return roleMapper.getRolePermissionById(roleId);
     }
 
-    // 创建角色信息，角色权限中间表信息
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int saveRoleAndRolePermission(Role role) {
@@ -140,7 +125,6 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
         return (flag1>0&&flag2>0 ? flag2:0);
     }
 
-    // 删除角色信息，角色权限中间表信息
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int removeRoleAndRolePermission(int roleId) {
@@ -149,7 +133,6 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
         return (flag1>0&&flag2>0 ? flag2:0);
     }
 
-    // 更新角色信息，角色权限中间表信息
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int updateRoleAndRolePermission(Role role) {
@@ -172,5 +155,10 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
         }
         int flag3 = rolePermissionMapper.saveBatch(rolePermissionList);
         return (flag1>0&&flag2>0&&flag3>0 ? flag3:0);
+    }
+
+    @Override
+    public List<Role> getRolesByAccount(String account) {
+        return roleMapper.getRolesByAccount(account);
     }
 }

@@ -17,7 +17,11 @@ public interface RoleMapper extends BaseMapper<Role> {
     List<Role> listRolePermissions();
     Role getRolePermissionById(int roleId);
 
-//    int saveRoleMenuBatch(List<RoleMenu> roleMenuList);
-//
-//    int removeRoleMenu(int userId);
+    /**
+     * 根据用户账号获取用户的角色信息
+     *
+     * @param account 用户账号
+     * @return 对应用户的角色集合
+     */
+    List<Role> getRolesByAccount(String account);
 }

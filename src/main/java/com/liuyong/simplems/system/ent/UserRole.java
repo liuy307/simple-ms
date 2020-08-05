@@ -7,7 +7,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-@ApiModel("用户角色关联对象")
+@ApiModel("用户角色中间表对象")
 public class UserRole implements Serializable {
     @ApiModelProperty(value = "主键id", example = "1")
     private Integer id;

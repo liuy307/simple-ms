@@ -129,4 +129,10 @@
         where u.account = #{account}
     </select>
 
+    <select id="getUserByAccount" parameterType="java.lang.String" resultMap="UserRoleMap">
+        select
+        id, user_name, description, account, password
+        from user
+        where account = #{account}
+    </select>
 </mapper>

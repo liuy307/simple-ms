@@ -4,6 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+/**
+ * 基础Service接口实现类
+ *
+ * @author liuyong
+ * @date 2020/8/5 9:43
+ */
 public class BaseServiceImpl<E> implements BaseService<E> {
     @Autowired
     BaseMapper<E> baseMapper;

@@ -21,7 +21,6 @@ public class RoleController extends ExceptionHandlerController {
     @Autowired
     RoleService roleService;
 
-    // 角色菜单
     @ApiOperation("列出角色菜单信息")
     @PostMapping("/listRoleMenus")
     ApiResponse<List<Role>> listRoleMenus() {
@@ -54,7 +53,6 @@ public class RoleController extends ExceptionHandlerController {
         return ApiResponse.success(flag);
     }
 
-    // 角色权限
     @ApiOperation("列出角色权限信息")
     @PostMapping("/listRolePermissions")
     ApiResponse<List<Role>> listRolePermissions() {

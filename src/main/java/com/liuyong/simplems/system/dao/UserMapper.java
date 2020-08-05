@@ -20,4 +20,12 @@ public interface UserMapper extends BaseMapper<User> {
     List<User> listUserRoleMenusByAccount(String account);
 
     List<User> listUserRoleMenusPermissionsByLoginInfo(LoginInfo loginInfo);
+
+    /**
+     * 根据用户账号获取用户信息
+     *
+     * @param account 用户账号
+     * @return 对应用户
+     */
+    User getUserByAccount(String account);
 }
