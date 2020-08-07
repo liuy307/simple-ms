@@ -4,7 +4,6 @@ import com.liuyong.simplems.common.base.BaseService;
 import com.liuyong.simplems.system.ent.Menu;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * 菜单Service接口
@@ -36,5 +35,5 @@ public interface MenuService extends BaseService<Menu> {
      * @param account 用户账号
      * @return 菜单集
      */
-    Set<String> getMenuNameSetByAccount(String account);
+    List<Menu> getMenusByAccount(String account);
 }

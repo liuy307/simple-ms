@@ -1,6 +1,10 @@
 package com.liuyong.simplems.system.manager;
 
+import com.liuyong.simplems.common.core.utils.FebsUtil;
+import com.liuyong.simplems.common.domain.FebsConstant;
+import com.liuyong.simplems.common.service.CacheService;
 import com.liuyong.simplems.system.dao.UserRoleMapper;
+import com.liuyong.simplems.system.ent.Menu;
 import com.liuyong.simplems.system.ent.Permission;
 import com.liuyong.simplems.system.ent.Role;
 import com.liuyong.simplems.system.ent.User;
@@ -25,6 +29,9 @@ import java.util.stream.Collectors;
 @Service
 public class UserManager {
     @Autowired
+    CacheService cacheService;
+
+    @Autowired
     UserService userService;
 
     @Autowired
@@ -36,20 +43,66 @@ public class UserManager {
     @Autowired
     PermissionService permissionService;
 
-    public User getUser(String account) {
-        return userService.getUserByAccount(account);
+    /**
+     * 将用户相关信息添加到 redis缓存中
+     *
+     * @param user user
+     * @return void
+     */
+    public void loadUserRedisCache(User user) throws Exception {
+        String account = user.getAccount();
+        cacheService.saveUserByAccount(account);
+        cacheService.saveRolesByAccount(account);
+        cacheService.savePermissionsByAccount(account);
     }
 
+    /**
+     * 获取用户信息，优先查询缓存
+     *
+     * @param account 用户账号
+     * @return 用户
+     */
+    public User getUser(String account) {
+        return FebsUtil.selectCacheByTemplate(
+                () -> cacheService.getUserByAccount(account),
+                () -> userService.getUserByAccount(account));
+    }
+
+    /**
+     * 获取角色信息，优先查询缓存
+     *
+     * @param account 用户账号
+     * @return 角色集
+     */
     public Set<String> getRoleNameSet(String account) {
-        List<Role> roles = roleService.getRolesByAccount(account);
+
+        List<Role> roles = FebsUtil.selectCacheByTemplate(
+                () -> cacheService.getRolesByAccount(account),
+                () -> roleService.getRolesByAccount(account));
         return roles.stream().map(role -> role.getRoleName()).collect(Collectors.toSet());
     }
 
-    public Set<String> getMenuNameSet(String account) {
-        return new HashSet<String>(menuService.getMenuNameSetByAccount(account));
+    /**
+     * 获取权限信息，优先查询缓存
+     *
+     * @param account 用户账号
+     * @return 权限集
+     */
+    public Set<String> getPermissionNameSet(String account) {
+        List<Permission> permissions =  FebsUtil.selectCacheByTemplate(
+                () -> cacheService.getPermissionsByAccount(account),
+                () -> permissionService.getPermissionsByAccount(account));
+        return permissions.stream().map(permission -> permission.getPermissionName()).collect(Collectors.toSet());
     }
 
-    public Set<String> getPermissionNameSet(String account) {
-        return new HashSet<String>(permissionService.getPermissionNameSetByAccount(account));
+    /**
+     * 获取菜单信息，优先查询缓存
+     *
+     * @param account 用户账号
+     * @return 角色集
+     */
+    public Set<String> getMenuNameSet(String account) {
+        List<Menu> menus = menuService.getMenusByAccount(account);
+        return menus.stream().map(menu -> menu.getMenuName()).collect(Collectors.toSet());
     }
 }

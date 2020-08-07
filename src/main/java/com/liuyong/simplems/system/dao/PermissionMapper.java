@@ -12,5 +12,5 @@ import java.util.Set;
 public interface PermissionMapper extends BaseMapper<Permission> {
     List<Integer> getIdByNameBatch(List<String> permissionNameList);
 
-    Set<String> getPermissionNameSetByAccount(String account);
+    List<Permission> getPermissionsByAccount(String account);
 }

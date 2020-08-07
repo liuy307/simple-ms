@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuService {
@@ -43,7 +42,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
     }
 
     @Override
-    public Set<String> getMenuNameSetByAccount(String account) {
-        return menuMapper.getMenuNameSetByAccount(account);
+    public List<Menu> getMenusByAccount(String account) {
+        return menuMapper.getMenusByAccount(account);
     }
 }

@@ -13,6 +13,18 @@ spring:
     username: root
     password: admin
 
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    jedis:
+      pool:
+        min-idle: 8
+        max-idle: 500
+        max-active: 2000
+        max-wait: 10000
+    timeout: 0
+
 mybatis:
   mapper-locations: mappers/*.xml
   type-aliases-package: com.liuyong.simplems.dao
@@ -27,5 +39,7 @@ swagger:
   enabled: true
   #禁用swagger时的重定向地址
   redirect-uri: /
+
+
 
 

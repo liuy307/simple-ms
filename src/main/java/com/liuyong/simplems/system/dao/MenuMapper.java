@@ -11,5 +11,5 @@ import java.util.Set;
 public interface MenuMapper extends BaseMapper<Menu> {
     List<Integer> getIdByNameBatch(List<String> menuNameList);
 
-    Set<String> getMenuNameSetByAccount(String account);
+    List<Menu> getMenusByAccount(String account);
 }

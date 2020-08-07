@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class PermissionServiceImpl extends BaseServiceImpl<Permission> implements PermissionService {
@@ -16,7 +15,7 @@ public class PermissionServiceImpl extends BaseServiceImpl<Permission> implement
     PermissionMapper permissionMapper;
 
     @Override
-    public Set<String> getPermissionNameSetByAccount(String account) {
-        return permissionMapper.getPermissionNameSetByAccount(account);
+    public List<Permission> getPermissionsByAccount(String account) {
+        return permissionMapper.getPermissionsByAccount(account);
     }
 }

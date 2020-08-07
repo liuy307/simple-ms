@@ -1,12 +1,14 @@
 package com.liuyong.simplems;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.liuyong.simplems.common.service.CacheService;
+import com.liuyong.simplems.common.service.RedisService;
+import com.liuyong.simplems.exception.RedisConnectException;
 import com.liuyong.simplems.system.dao.RoleMapper;
 import com.liuyong.simplems.system.dao.UserMapper;
 import com.liuyong.simplems.system.dao.UserRoleMapper;
-import com.liuyong.simplems.system.ent.LoginInfo;
-import com.liuyong.simplems.system.ent.Menu;
-import com.liuyong.simplems.system.ent.User;
-import com.liuyong.simplems.system.ent.UserRole;
+import com.liuyong.simplems.system.ent.*;
 import com.liuyong.simplems.system.manager.UserManager;
 import com.liuyong.simplems.system.service.MenuService;
 import com.liuyong.simplems.system.service.RoleService;
@@ -14,6 +16,7 @@ import com.liuyong.simplems.system.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,7 +41,13 @@ class SimpleMsApplicationTests {
     UserMapper userMapper;
 
     @Autowired
-    UserManager userManager;
+    RedisService redisService;
+
+    @Autowired
+    ObjectMapper objectMapper;
+
+    @Autowired
+    RedisTemplate<String, String> redisTemplate;
 
     @Test
     void contextLoads() {
@@ -70,6 +79,14 @@ class SimpleMsApplicationTests {
         userRoleMapper.removeByUserId(3);
     }
 
+    @Autowired
+    RoleMapper roleMapper;
+    @Test
+    void testRoleService() {
+        List<Role> roles = roleMapper.getRolesByAccount("111");
+        List<Role> roles2 = roleService.getRolesByAccount("111");
+    }
+
     @Test
     void testLogin() {
         LoginInfo loginInfo = new LoginInfo();
@@ -86,5 +103,46 @@ class SimpleMsApplicationTests {
         Set<String> roleNames = userManager.getRoleNameSet(account);
         Set<String> permissionNames = userManager.getPermissionNameSet(account);
         Set<String> menuNames = userManager.getMenuNameSet(account);
+    }
+
+    @Test
+    void testRedis() throws RedisConnectException, JsonProcessingException {
+        LoginInfo loginInfo = new LoginInfo();
+        loginInfo.setAccount("111");
+        loginInfo.setPassword("111");
+
+        String result = redisService.set("liu", objectMapper.writeValueAsString(loginInfo));
+        String objString = redisService.get("liu");
+        LoginInfo obj = objectMapper.readValue(objString, loginInfo.getClass());
+    }
+
+    @Test
+    void testRedisTemple() {
+        String result = redisTemplate.opsForValue().get("liu");
+    }
+
+    @Autowired
+    CacheService cacheService;
+    @Test
+    void testCacheService() throws Exception {
+        String account = "111";
+        cacheService.saveUserByAccount(account);
+        cacheService.saveRolesByAccount(account);
+        cacheService.savePermissionsByAccount(account);
+
+        User user = cacheService.getUserByAccount(account);
+        List<Role> roles = cacheService.getRolesByAccount(account);
+        List<Permission>permissions = cacheService.getPermissionsByAccount(account);
+    }
+
+    @Autowired
+    UserManager userManager;
+    @Test
+    void testUserManage() throws RedisConnectException, JsonProcessingException {
+        String account = "111";
+        User user = userManager.getUser(account);
+
+        cacheService.saveUserByAccount(account);
+        User user2 = userManager.getUser(account);
     }
 }
