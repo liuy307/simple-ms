@@ -34,10 +34,10 @@ public class UserController extends ExceptionHandlerController {
         return ApiResponse.success(userService.listUserRoles());
     }
 
-    @ApiOperation("获取人员角色信息(根据id)")
-    @PostMapping("/getUserRoleById")
-    ApiResponse<User> getUserRoleById(int useId) {
-        return ApiResponse.success(userService.getUserRoleById(useId));
+    @ApiOperation("获取人员角色信息(根据账号)")
+    @PostMapping("/getUserRoleByAccount")
+    ApiResponse<User> getUserRoleByAccount(String Account) {
+        return ApiResponse.success(userService.getUserRoleByAccount(Account));
     }
 
     @ApiOperation("新增用户表和用户角色中间表信息")

@@ -64,6 +64,8 @@
         </collection>
     </resultMap>
 
+
+
     <select id="listUserRoles" resultMap="UserRoleMap">
         select u.*, r.id as r_id, r.role_name, r.description as r_description, m.id as m_id, m.menu_name, m.description as m_description, m.parent_menu_id
         from user as u
@@ -73,51 +75,24 @@
         left join menu as m on rm.menu_id = m.id
     </select>
 
-    <select id="getUserRoleById" resultMap="UserRoleMap">
+    <select id="getUserByAccount" parameterType="java.lang.String" resultMap="UserRoleMap">
+        select
+        id, user_name, description, account, password
+        from user
+        where account = #{account}
+    </select>
+
+    <select id="getUserRoleByAccount" parameterType="java.lang.String" resultMap="UserRoleMap">
         select u.*, r.id as r_id, r.role_name, r.description as r_description
         from user as u
         left join user_role as ur on u.id = ur.user_id
         left join role as r on ur.role_id = r.id
         left join role_menu as rm on r.id = rm.role_id
         left join menu as m on rm.menu_id = m.id
-        where u.id = #{id}
+        where account = #{account}
     </select>
 
-    <insert id="saveUserRoleBatch" parameterType="com.liuyong.simplems.system.ent.UserRole">
-        insert into user_role(user_id, role_id)
-        values
-        <foreach collection="list" item="userRole" index="index" separator=",">
-            (#{userRole.userId}, #{userRole.roleId})
-        </foreach>
-    </insert>
-
-    <delete id="removeUserRole">
-        delete
-        from user_role
-        where user_id = #{useId}
-    </delete>
-
-    <select id="listUserRoleMenusByLoginInfo" parameterType="com.liuyong.simplems.system.ent.LoginInfo" resultMap="UserRoleMap">
-        select u.*, r.id as r_id, r.role_name, r.description as r_description, m.id as m_id, m.menu_name, m.description as m_description, m.parent_menu_id
-        from user as u
-        left join user_role as ur on u.id = ur.user_id
-        left join role as r on ur.role_id = r.id
-        left join role_menu as rm on r.id = rm.role_id
-        left join menu as m on rm.menu_id = m.id
-        where u.account = #{account}
-    </select>
-
-    <select id="listUserRoleMenusByAccount" parameterType="java.lang.String" resultMap="UserRoleMap">
-        select u.*, r.id as r_id, r.role_name, r.description as r_description, m.id as m_id, m.menu_name, m.description as m_description, m.parent_menu_id
-        from user as u
-        left join user_role as ur on u.id = ur.user_id
-        left join role as r on ur.role_id = r.id
-        left join role_menu as rm on r.id = rm.role_id
-        left join menu as m on rm.menu_id = m.id
-        where u.account = #{account}
-    </select>
-
-    <select id="listUserRoleMenusPermissionsByLoginInfo" parameterType="com.liuyong.simplems.system.ent.LoginInfo" resultMap="UserRoleMap">
+    <select id="getUserRoleMenusPermissionsByAccount" parameterType="java.lang.String" resultMap="UserRoleMap">
         select u.*, r.id as r_id, r.role_name, r.description as r_description, m.id as m_id, m.menu_name, m.description as m_description, m.parent_menu_id, p.id as p_id, p.permission_name, p.description as p_description
         from user as u
         left join user_role as ur on u.id = ur.user_id
@@ -127,12 +102,5 @@
         left join role_permission rp on r.id = rp.role_id
         left join permission p on rp.permission_id = p.id
         where u.account = #{account}
-    </select>
-
-    <select id="getUserByAccount" parameterType="java.lang.String" resultMap="UserRoleMap">
-        select
-        id, user_name, description, account, password
-        from user
-        where account = #{account}
     </select>
 </mapper>

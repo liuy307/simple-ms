@@ -4,11 +4,9 @@ import com.liuyong.simplems.common.base.BaseServiceImpl;
 import com.liuyong.simplems.system.dao.RoleMapper;
 import com.liuyong.simplems.system.dao.UserMapper;
 import com.liuyong.simplems.system.dao.UserRoleMapper;
-import com.liuyong.simplems.system.ent.LoginInfo;
 import com.liuyong.simplems.system.ent.User;
 import com.liuyong.simplems.system.ent.UserRole;
 import com.liuyong.simplems.system.service.UserService;
-import org.apache.shiro.authc.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,8 +32,8 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     }
 
     @Override
-    public User getUserRoleById(int userId) {
-        return userMapper.getUserRoleById(userId);
+    public User getUserRoleByAccount(String account) {
+        return userMapper.getUserRoleByAccount(account);
     }
 
     @Override
@@ -87,16 +85,6 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
         }
         int flag3 = userRoleMapper.saveBatch(userRoleList);
         return (flag1>0&&flag2>0&&flag3>0 ? flag3:0);
-    }
-
-    @Override
-    public List<User> listUserRoleMenusByLoginInfo(LoginInfo loginInfo) {
-        return userMapper.listUserRoleMenusByLoginInfo(loginInfo);
-    }
-
-    @Override
-    public List<User> listUserRoleMenusByAccount(String account) {
-        return userMapper.listUserRoleMenusByAccount(account);
     }
 
     @Override

@@ -61,12 +61,11 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                 } catch (JWTDecodeException j) {
                     throw new RuntimeException("401");
                 }
-                List<User> userList = userService.listUserRoleMenusByAccount(account);
+                User user = userService.getUserByAccount(account);
 
-                if (userList == null || userList.size()<1) {
+                if (user == null) {
                     throw new RuntimeException("用户不存在，请重新登录");
                 }
-                User user = userList.get(0);
                 // 验证 token
                 if (! JWTUtil.verify(token, account, user.getPassword())) {
                     throw new AuthenticationException("Username or password error");

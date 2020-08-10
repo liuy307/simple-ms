@@ -13,14 +13,6 @@ import java.util.List;
 public interface UserMapper extends BaseMapper<User> {
     List<User> listUserRoles();
 
-    User getUserRoleById(int id);
-
-    List<User> listUserRoleMenusByLoginInfo(LoginInfo loginInfo);
-
-    List<User> listUserRoleMenusByAccount(String account);
-
-    List<User> listUserRoleMenusPermissionsByLoginInfo(LoginInfo loginInfo);
-
     /**
      * 根据用户账号获取用户信息
      *
@@ -28,4 +20,8 @@ public interface UserMapper extends BaseMapper<User> {
      * @return 对应用户
      */
     User getUserByAccount(String account);
+
+    User getUserRoleByAccount(String account);
+
+    User getUserRoleMenusPermissionsByAccount(String account);
 }

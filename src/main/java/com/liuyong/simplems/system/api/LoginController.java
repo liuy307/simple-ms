@@ -69,26 +69,5 @@ public class LoginController extends ExceptionHandlerController {
     public ApiResponse getUserInfo(LoginInfo loginInfo) {
         return ApiResponse.success(loginInfo);
     }
-
-//    public void getUserInfo(int s) {
-//        List<User> matchUsers = userService.listUserRoleMenusByLoginInfo(loginInfo);
-//        if(matchUsers ==null || matchUsers.size() < 1 ){
-//            return ApiResponse.failed("用户名不存在！");
-//        }
-//        User user = matchUsers.get(0);
-//        if(!Objects.equals(loginInfo.getPassword(), user.getPassword())) {
-//            return ApiResponse.failed("密码不正确！");
-//        }
-//
-//        List<Integer> roleIdList = user.getRoleList().stream().map(role -> role.getId()).collect(Collectors.toList());
-//        Set<String> roleNameSet = user.getRoleList().stream().map(role -> role.getRoleName()).collect(Collectors.toSet());
-//        List<Role> roleMenuList = roleIdList.stream().map(roleId -> roleService.getRoleMenuById(roleId)).collect(Collectors.toList());
-//        List<Role> rolePermissionList = roleIdList.stream().map(roleId -> roleService.getRolePermissionById(roleId)).collect(Collectors.toList());
-//        Set<String> menuNameSet = new HashSet<>();
-//        Set<String> permissionNameSet = new HashSet<>();
-//        roleMenuList.stream().forEach(roleMenu -> roleMenu.getMenuList().stream().forEach(menu -> menuNameSet.add(menu.getMenuName())));
-//        rolePermissionList.stream().forEach(rolePermission -> rolePermission.getPermissionList().stream().forEach(permission -> permissionNameSet.add(permission.getPermissionName())));
-//
-//    }
 }
 

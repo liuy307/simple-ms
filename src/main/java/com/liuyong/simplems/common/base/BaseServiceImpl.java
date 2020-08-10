@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class BaseServiceImpl<E> implements BaseService<E> {
     @Autowired
-    BaseMapper<E> baseMapper;
+    protected BaseMapper<E> baseMapper;
 
     @Override
     public List<E> list() {

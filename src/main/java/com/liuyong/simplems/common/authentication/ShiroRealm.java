@@ -50,12 +50,11 @@ public class ShiroRealm extends AuthorizingRealm {
             throw new AuthenticationException("token invalid");
         }
 
-        List<User> userBeans = userService.listUserRoleMenusByAccount(account);
-        if (userBeans == null) {
+        User user = userService.getUserByAccount(account);
+        if (user == null) {
             throw new AuthenticationException("User didn't existed!");
         }
-        User userBean = userBeans.get(0);
-        if (! JWTUtil.verify(token, account, userBean.getPassword())) {
+        if (! JWTUtil.verify(token, account, user.getPassword())) {
             throw new AuthenticationException("Username or password error");
         }
 

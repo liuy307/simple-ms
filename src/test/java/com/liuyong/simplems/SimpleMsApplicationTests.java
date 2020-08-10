@@ -50,14 +50,6 @@ class SimpleMsApplicationTests {
     RedisTemplate<String, String> redisTemplate;
 
     @Test
-    void contextLoads() {
-        LoginInfo loginInfo = new LoginInfo();        loginInfo.setAccount("111");
-        loginInfo.setPassword("111");
-        List<User> users = userMapper.listUserRoleMenusPermissionsByLoginInfo(loginInfo);
-        System.out.println(users);
-    }
-
-    @Test
     void testMenuService() {
 //        List<Menu> allMenus = menuService.list();
 //        List<Menu> levelMenus = new ArrayList<>();
@@ -85,15 +77,6 @@ class SimpleMsApplicationTests {
     void testRoleService() {
         List<Role> roles = roleMapper.getRolesByAccount("111");
         List<Role> roles2 = roleService.getRolesByAccount("111");
-    }
-
-    @Test
-    void testLogin() {
-        LoginInfo loginInfo = new LoginInfo();
-        loginInfo.setAccount("111");
-        loginInfo.setPassword("111");
-        List<User> s = userService.listUserRoleMenusByLoginInfo(loginInfo);
-        System.out.println(s);
     }
 
     @Test
