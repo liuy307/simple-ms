@@ -3,6 +3,7 @@ package com.liuyong.simplems.system.api;
 import com.liuyong.simplems.common.base.BaseController;
 import com.liuyong.simplems.common.base.ExceptionHandlerController;
 import com.liuyong.simplems.common.core.model.ApiResponse;
+import com.liuyong.simplems.system.dto.UserDTO;
 import com.liuyong.simplems.system.ent.User;
 import com.liuyong.simplems.system.service.UserService;
 import io.swagger.annotations.Api;
@@ -36,14 +37,14 @@ public class UserController extends ExceptionHandlerController {
 
     @ApiOperation("获取人员角色信息(根据账号)")
     @PostMapping("/getUserRoleByAccount")
-    ApiResponse<User> getUserRoleByAccount(String Account) {
+    ApiResponse getUserRoleByAccount(String Account) {
         return ApiResponse.success(userService.getUserRoleByAccount(Account));
     }
 
     @ApiOperation("新增用户表和用户角色中间表信息")
     @PostMapping("/saveUserAndUserRole")
-    ApiResponse<Integer> saveUserAndUserRole(@RequestBody User user) {
-        int flag = userService.saveUserAndUserRole(user);
+    ApiResponse<Integer> saveUserAndUserRole(UserDTO userDto) {
+        int flag = userService.saveUserAndUserRole(userDto);
         return ApiResponse.success(flag);
     }
 
@@ -55,8 +56,8 @@ public class UserController extends ExceptionHandlerController {
 
     @ApiOperation("更新用户表和用户角色中间表信息")
     @PostMapping("/updateUserAndUserRole")
-    ApiResponse<Integer> updateUserAndUserRole(User user) {
-        int flag = userService.updateUserAndUserRole(user);
+    ApiResponse<Integer> updateUserAndUserRole(UserDTO userDto) {
+        int flag = userService.updateUserAndUserRole(userDto);
         return ApiResponse.success(flag);
     }
 }

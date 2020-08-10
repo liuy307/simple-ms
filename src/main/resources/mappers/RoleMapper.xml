@@ -62,8 +62,8 @@
         where u.account = #{account}
     </select>
 
-    <resultMap id="RoleMenuMap" type="com.liuyong.simplems.system.ent.Role">
-        <id column="id" jdbcType="INTEGER" property="id" />
+    <resultMap id="RoleMenuMap" type="com.liuyong.simplems.system.vo.RoleVO">
+        <id column="r_id" jdbcType="INTEGER" property="id" />
         <result column="role_name" jdbcType="VARCHAR" property="roleName" />
         <result column="description" jdbcType="VARCHAR" property="description" />
         <collection property="menuList" ofType="com.liuyong.simplems.system.ent.Menu">
@@ -74,24 +74,49 @@
         </collection>
     </resultMap>
 
+    <sql id="roleMenuSql">
+        r.id as r_id,
+        r.role_name,
+        r.description as r_description,
+        m.id as m_id,
+        m.menu_name,
+        m.description as m_description,
+        m.parent_menu_id
+    </sql>
+
     <select id="listRoleMenus" resultMap="RoleMenuMap">
-        select r.*, m.id as m_id, m.menu_name, m.description as m_description, m.parent_menu_id
+        select
+        r.id as r_id,
+        r.role_name,
+        r.description as r_description,
+        m.id as m_id,
+        m.menu_name,
+        m.description as m_description,
+        m.parent_menu_id
         from
-        role as r left join role_menu as rm on r.id = rm.role_id
+        role as r
+        left join role_menu as rm on r.id = rm.role_id
         left join menu as m on rm.menu_id = m.id
     </select>
 
     <select id="getRoleMenuById" resultMap="RoleMenuMap">
-        select r.*, m.id as m_id, m.menu_name, m.description as m_description, m.parent_menu_id
+        select
+        r.id as r_id,
+        r.role_name,
+        r.description as r_description,
+        m.id as m_id,
+        m.menu_name,
+        m.description as m_description,
+        m.parent_menu_id
         from
-        role as r left join role_menu as rm on r.id = rm.role_id
+        role as r
+        left join role_menu as rm on r.id = rm.role_id
         left join menu as m on rm.menu_id = m.id
         where r.id = #{id}
     </select>
 
-
-    <resultMap id="RolePermissionMap" type="com.liuyong.simplems.system.ent.Role">
-        <id column="id" jdbcType="INTEGER" property="id" />
+    <resultMap id="RolePermissionMap" type="com.liuyong.simplems.system.vo.RoleVO">
+        <id column="r_id" jdbcType="INTEGER" property="id" />
         <result column="role_name" jdbcType="VARCHAR" property="roleName" />
         <result column="description" jdbcType="VARCHAR" property="description" />
         <collection property="permissionList" ofType="com.liuyong.simplems.system.ent.Permission">
@@ -101,15 +126,35 @@
         </collection>
     </resultMap>
 
+    <sql id="RolePermissionSql">
+        r.id as r_id,
+        r.role_name,
+        r.description as r_description,
+        p.id as p_id,
+        p.permission_name,
+        p.description as p_description
+    </sql>
     <select id="listRolePermissions" resultMap="RolePermissionMap">
-        select r.*, p.id as p_id, p.permission_name, p.description as p_description
+        select
+        r.id as r_id,
+        r.role_name,
+        r.description as r_description,
+        p.id as p_id,
+        p.permission_name,
+        p.description as p_description
         from
         role as r left join role_permission as rp on r.id = rp.role_id
         left join permission as p on rp.permission_id = p.id
     </select>
 
     <select id="getRolePermissionById" resultMap="RolePermissionMap">
-        select r.*, p.id as p_id, p.permission_name, p.description as p_description
+        select
+        r.id as r_id,
+        r.role_name,
+        r.description as r_description,
+        p.id as p_id,
+        p.permission_name,
+        p.description as p_description
         from
         role as r left join role_permission as rp on r.id = rp.role_id
         left join permission as p on rp.permission_id = p.id

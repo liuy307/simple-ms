@@ -8,6 +8,8 @@ import com.liuyong.simplems.exception.RedisConnectException;
 import com.liuyong.simplems.system.dao.RoleMapper;
 import com.liuyong.simplems.system.dao.UserMapper;
 import com.liuyong.simplems.system.dao.UserRoleMapper;
+import com.liuyong.simplems.system.dto.UserDTO;
+import com.liuyong.simplems.system.dto.UserDTO2;
 import com.liuyong.simplems.system.ent.*;
 import com.liuyong.simplems.system.manager.UserManager;
 import com.liuyong.simplems.system.service.MenuService;
@@ -127,5 +129,16 @@ class SimpleMsApplicationTests {
 
         cacheService.saveUserByAccount(account);
         User user2 = userManager.getUser(account);
+    }
+
+    @Autowired
+    UserMapper userMapper;
+
+    @Test
+    void testDTO() {
+        UserDTO userDTO = new UserDTO();
+        UserDTO2 userDTO2 = new UserDTO2();
+        userMapper.save(userDTO);
+//        userMapper.save(userDTO2);
     }
 }
