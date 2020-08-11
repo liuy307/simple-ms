@@ -48,14 +48,14 @@
     </update>
 
 <!--    自定义-->
-    <select id="getUserByAccount" parameterType="java.lang.String" resultMap="UserRoleMap">
+    <select id="getUserByAccount" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         id, user_name, description, account, password
         from user
         where account = #{account}
     </select>
 
-    <resultMap id="UserVOMap" type="com.liuyong.simplems.system.vo.UserVO">
+    <resultMap id="UserRoleMap" type="com.liuyong.simplems.system.vo.UserVO">
         <id column="u_id" jdbcType="INTEGER" property="id" />
         <result column="user_name" jdbcType="VARCHAR" property="userName" />
         <result column="description" jdbcType="VARCHAR" property="description" />
@@ -79,7 +79,7 @@
         r.description as r_description
     </sql>
 
-    <select id="listUserRoles" resultMap="UserVOMap">
+    <select id="listUserRoles" resultMap="UserRoleMap">
         select
         <include refid="userRoleSql"/>
         from user as u
@@ -87,7 +87,7 @@
         left join role as r on ur.role_id = r.id
     </select>
 
-    <select id="getUserRoleByAccount" parameterType="java.lang.String" resultMap="UserVOMap">
+    <select id="getUserRoleByAccount" parameterType="java.lang.String" resultMap="UserRoleMap">
         select
         <include refid="userRoleSql"/>
         from user as u
@@ -96,7 +96,7 @@
         where account = #{account}
     </select>
 
-    <resultMap id="UserRoleMap" type="com.liuyong.simplems.system.vo.UserVO">
+    <resultMap id="UserRoleMenuPermissionMap" type="com.liuyong.simplems.system.vo.UserVO">
         <id column="u_id" jdbcType="INTEGER" property="id" />
         <result column="user_name" jdbcType="VARCHAR" property="userName" />
         <result column="description" jdbcType="VARCHAR" property="description" />
@@ -120,7 +120,7 @@
         </collection>
     </resultMap>
 
-    <select id="getUserRoleMenusPermissionsByAccount" parameterType="java.lang.String" resultMap="UserRoleMap">
+    <select id="getUserRoleMenusPermissionsByAccount" parameterType="java.lang.String" resultMap="UserRoleMenuPermissionMap">
         select u.*, r.id as r_id, r.role_name, r.description as r_description, m.id as m_id, m.menu_name, m.description as m_description, m.parent_menu_id, p.id as p_id, p.permission_name, p.description as p_description
         from user as u
         left join user_role as ur on u.id = ur.user_id

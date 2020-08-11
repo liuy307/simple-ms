@@ -39,6 +39,12 @@ public class LoginController extends ExceptionHandlerController {
     @Autowired
     UserManager userManager;
 
+    /**
+     *验证登录信息，
+     *
+     * @param loginInfo 用户登录信息，账号account和密码password
+     * @return userInfo - 用户、角色、菜单、token信息的封装类
+     */
     @ApiOperation("登录验证")
     @PostMapping("/login")
     public ApiResponse login(LoginInfo loginInfo) {
@@ -46,6 +52,7 @@ public class LoginController extends ExceptionHandlerController {
         if(user == null){
             return ApiResponse.failed("用户名不存在！");
         }
+
         Set<String> roleNameSet = userManager.getRoleNameSet(loginInfo.getAccount());
         Set<String> menuNameSet = userManager.getMenuNameSet(loginInfo.getAccount());
         Set<String> permissionNameSet = userManager.getPermissionNameSet(loginInfo.getAccount());

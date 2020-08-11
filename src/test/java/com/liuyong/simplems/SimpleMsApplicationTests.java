@@ -9,7 +9,6 @@ import com.liuyong.simplems.system.dao.RoleMapper;
 import com.liuyong.simplems.system.dao.UserMapper;
 import com.liuyong.simplems.system.dao.UserRoleMapper;
 import com.liuyong.simplems.system.dto.UserDTO;
-import com.liuyong.simplems.system.dto.UserDTO2;
 import com.liuyong.simplems.system.ent.*;
 import com.liuyong.simplems.system.manager.UserManager;
 import com.liuyong.simplems.system.service.MenuService;
@@ -20,8 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -131,13 +128,11 @@ class SimpleMsApplicationTests {
         User user2 = userManager.getUser(account);
     }
 
-    @Autowired
-    UserMapper userMapper;
 
     @Test
     void testDTO() {
         UserDTO userDTO = new UserDTO();
-        UserDTO2 userDTO2 = new UserDTO2();
+//        UserDTO2 userDTO2 = new UserDTO2();
         userMapper.save(userDTO);
 //        userMapper.save(userDTO2);
     }

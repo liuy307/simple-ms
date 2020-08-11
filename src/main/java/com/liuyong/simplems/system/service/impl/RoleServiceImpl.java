@@ -6,8 +6,10 @@ import com.liuyong.simplems.system.dto.RoleDTO;
 import com.liuyong.simplems.system.ent.Role;
 import com.liuyong.simplems.system.ent.RoleMenu;
 import com.liuyong.simplems.system.ent.RolePermission;
+import com.liuyong.simplems.system.ent.User;
 import com.liuyong.simplems.system.service.RoleService;
 import com.liuyong.simplems.system.vo.RoleVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,7 +53,10 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int saveRoleAndRoleMenu(RoleDTO roleDto) {
-        int flag1 = roleMapper.save(roleDto);
+        Role role = new Role();
+        BeanUtils.copyProperties(roleDto, role);
+
+        int flag1 = roleMapper.save(role);
         int roleId = roleDto.getId();
 
         List<String> menuNameList = roleDto.getMenuNameList();
@@ -79,7 +84,10 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int updateRoleAndRoleMenu(RoleDTO roleDto) {
-        int flag1 = roleMapper.update(roleDto);
+        Role role = new Role();
+        BeanUtils.copyProperties(roleDto, role);
+
+        int flag1 = roleMapper.update(role);
         int roleId = roleDto.getId();
 
         int flag2 = roleMenuMapper.removeByRoleId(roleId);
@@ -112,7 +120,10 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int saveRoleAndRolePermission(RoleDTO roleDto) {
-        int flag1 = roleMapper.save(roleDto);
+        Role role = new Role();
+        BeanUtils.copyProperties(roleDto, role);
+
+        int flag1 = roleMapper.save(role);
         int roleId = roleDto.getId();
 
         List<String> permissionNameList = roleDto.getPermissionNameList();
@@ -140,7 +151,10 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int updateRoleAndRolePermission(RoleDTO roleDto) {
-        int flag1 = roleMapper.update(roleDto);
+        Role role = new Role();
+        BeanUtils.copyProperties(roleDto, role);
+
+        int flag1 = roleMapper.update(role);
         int roleId = roleDto.getId();
 
         int flag2 = rolePermissionMapper.removeByRoleId(roleId);
